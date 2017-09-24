@@ -42,6 +42,20 @@ def contact():
 @core.route('/projects')
 def projects():
     try:
-        return render_template('projects.html')
+        projects = []
+        projects_dir = os.path.join(*[os.path.dirname(__file__), 'static', 'projects'])
+
+        for folder in os.walk(projects_dir):
+            if folder[0].split('/')[-1] == "projects":
+                continue
+            files = folder[2]
+            assert(len(files) == 2)
+            dir_info = os.path.join(*folder[0].split('/')[-3:]) + '/'
+            if 'png' in files[0] or 'jpg' in files[0]:
+                projects.append((dir_info + files[0], dir_info + files[1]))
+            else:
+                projects.append((dir_info + files[1], dir_info + files[0]))
+
+        return render_template('projects.html', projects=projects)
     except TemplateNotFound:
         abort(404)
