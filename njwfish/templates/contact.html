@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% set active_page = "contact" %}
+{% block content %}
+<style>
+
+    div.col-xs-12{
+        margin-top: 50px;
+    }
+
+
+    a {
+        text-align: center;
+    }
+
+    a:link {
+        color: #4D4D4D;
+    }
+
+    a:visited {
+        color: #333333;
+    }
+
+    a:hover {
+        color: #FDA333;
+    }
+
+    a:hover p {
+        text-decoration: none;
+        background-color: white;
+    }
+
+    a:active {
+        color: #FDA333;
+    }
+
+    div.row {
+        text-align: center;
+    }
+
+
+</style>
+<h1>Contact Me</h1>
+<h3>How to get in touch</h3>
+<div class="row" style="margin-top: 60px">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <a href="tel:+1-919-995-1050">
+            <i class="fa  fa-phone fa-fw con" style="font-size: 60px; margin-left: 0; margin-right: 0;"></i>
+            <p class="cirlce">PHONE</p>
+            (919) 995-1050
+        </a>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <a href="mailto:njwfish@gmail.com" target="_blank">
+            <i class="fa fa-send-o  fa-fw con" style="font-size: 60px; margin-left: 0; margin-right: 0;"></i>
+            <p class="cirlce">EMAIL</p>
+            njwfish@gmail.com
+        </a>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <a class="twitter-follow-button"
+           href="https://twitter.com/njwfish"
+           data-size="large">
+            <i class="fa  fa-twitter fa-fw con" style="font-size: 60px; margin-left: 0; margin-right: 0;"></i>
+            <p class="cirlce">TWITTER</p>
+            Follow me
+        </a>
+    </div>
+</div>
+<div style="margin-top: 20px;"></div>
+{% endblock %}

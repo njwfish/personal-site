@@ -1,0 +1,329 @@
+@font-face {
+    font-family: "Lato";
+    src: url('../static/fnt/Lato/Lato-Light.ttf') format("opentype");
+}
+
+@font-face {
+    font-family: "texgyreheros-regular";
+    src: url('../static/fnt/TeX-Gyre-Heros/texgyreheros-regular.otf') format("opentype");
+}
+
+@font-face {
+    font-family: "texgyreheros-regular";
+    src: url('../static/fnt/TeX-Gyre-Heros/texgyreheros-regular.otf') format("opentype");
+}
+
+@font-face {
+    font-family: "texgyreheros-bold";
+    src: url('../static/fnt/TeX-Gyre-Heros/texgyreheros-bold.otf') format("opentype");
+}
+
+@font-face {
+    font-family: "texgyreheros-italic";
+    src: url('../static/fnt/TeX-Gyre-Heros/texgyreheros-italic.otf') format("opentype");
+}
+
+.dark {
+    background: #333333;
+}
+
+.gray {
+    background: #4D4D4D;
+}
+
+.light {
+    background: #999999;
+}
+
+body {
+    font-family: "texgyreheros-regular", serif;
+    color: #4D4D4D;
+    font-size: 13px;
+}
+
+a, h1, h2 {
+    color: #377ba8;
+}
+
+h1, h2 {
+    font-family: 'Georgia', serif;
+    margin: 0;
+}
+
+h1 {
+    font-family: "texgyreheros-bold", serif;
+    color: #4D4D4D;
+    text-align: center;
+}
+
+h2 {
+    font-family: "texgyreheros-bold", serif;
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+h3 {
+    font-family: "Lato", serif;
+    color: #999999;
+    text-align: center;
+    font-size: 1em;
+}
+
+.page {
+    margin: 2em auto;
+    width: 35em;
+    border: 5px solid #ccc;
+    padding: 0.8em;
+    background: white;
+}
+
+.entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.entries li {
+    margin: 0.8em 1.2em;
+}
+
+.entries li h2 {
+    margin-left: -1em;
+}
+
+.add-entry {
+    font-size: 0.9em;
+    border-bottom: 1px solid #ccc;
+}
+
+.add-entry dl {
+    font-weight: bold;
+}
+
+.metanav {
+    text-align: right;
+    font-size: 0.8em;
+    padding: 0.3em;
+    margin-bottom: 1em;
+    background: #fafafa;
+}
+
+.flash {
+    background: #cee5F5;
+    padding: 0.5em;
+    border: 1px solid #aacbe2;
+}
+
+.error {
+    background: #f0d6d6;
+    padding: 0.5em;
+}
+
+.menu {
+    height: 18vw;
+    max-height: 20%;
+    width: 100%;
+}
+
+.navbar {
+    display: inline-block;
+    float: none;
+    width: 100%;
+    border: none;
+    font-family: "texgyreheros-bold", sans-serif;
+    background: white;
+}
+
+.navbar-nav > li {
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #4D4D4D;
+    font-size: 20px;
+}
+
+    .navbar .navbar-collapse {
+        text-align: center;
+    }
+
+@media (min-width: 768px) {
+    .navbar .navbar-nav {
+        display: inline-block;
+        float: none;
+    }
+}
+
+p.thinfont-menu {
+    font-family: "Lato", serif;
+    font-size: 40px;
+    display: inline;
+    color: white;
+}
+
+p.thinfont-submenu {
+    font-family: "Lato", serif;
+    font-size: 3vh;
+    display: inline;
+    color: white;
+}
+
+p.bodyfont-menu {
+    font-family: "texgyreheros-regular", serif;
+    font-size: 40px;
+    display: inline;
+    color: white;
+}
+
+.vhcontainer {
+    position: relative;
+}
+
+.vhcenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.hcenter {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+.navbar .nav > .active > a {
+    background: none;
+}
+
+.navbar .nav > .active > a:hover {
+    background: none;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: white;
+}
+
+.logo {
+    background: url('../static/img/logo.png'); /* Your icon */
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-size: 30px 30px;
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    padding: .5em;
+    position: absolute;
+    right: 0;
+    margin-right: 5vw;
+    text-align: center;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #4D4D4D;
+}
+
+.logo::after {
+    position: absolute; /* Positions psuedo element relative to .icon */
+    width: 70%; /* Same dimensions as .icon */
+    height: 70%;
+    content: ""; /* Allows psuedo element to show */
+    background: #FB4485; /* The color you want the icon to change to */
+    mix-blend-mode: screen; /* Only apply color on top of white, use screen if icon is black */
+
+}
+
+.fa {
+    font-size: 24px;
+    padding: .5em;
+    margin-left: 5vw;
+    width: 55px; /** fix width ***/
+    text-align: center;
+    display: inline;
+    border-radius: 50%;
+    line-height: 55px; /** for vertical center - if needed **/
+    border-style: solid;
+    border-color: #4D4D4D;
+    color: #FB4485;
+}
+
+ul.nav a:hover, ul.nav a:hover p.pro {
+    color: #6CE0F1;
+}
+
+ul.nav a:hover, ul.nav a:hover p.abo {
+    color: #FB4485;
+}
+
+ul.nav a:hover, ul.nav a:hover p.con {
+    color: #FDA333;
+}
+
+.navbar .nav > .active > a p.pro {
+    color: #6CE0F1;
+}
+
+.navbar .nav > .active > a p.abo {
+    color: #FB4485;
+}
+
+.navbar .nav > .active > a p.con {
+    color: #FDA333;
+}
+
+.fa.pro {
+    color: #6CE0F1;
+}
+
+.fa.abo {
+    color: #FB4485;
+}
+
+.fa.con {
+    color: #FDA333;
+}
+
+.logo.pro::after {
+    background: #6CE0F1;
+}
+
+.logo.abo::after {
+    background: #FB4485;
+}
+
+.logo.con::after {
+    background: #FDA333;
+}
+
+    p.cirlce {
+        margin-top: 50px;
+        font-family: "Lato", serif;
+        color: #999999;
+        text-decoration: none !important;
+    }
+
+.footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:70px;
+   width:100%;
+   background:white;
+    border-top: #4d4d4d solid 2px;
+}

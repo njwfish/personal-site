@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% set active_page = "index" %}
+{% block content %}
+<style>
+
+        div.wide {
+            background-color: #FB4485;
+            width: 100%;
+            height: 130px;
+            max-height: 25vw;
+            position: absolute;
+            border-bottom: solid;
+            border-bottom-color: #333333;
+            left: 0;
+            right: 0;
+        }
+
+
+    .fa {
+        text-align: center;
+    }
+
+    div.col-md-4 {
+        margin-top: 200px;
+        text-align: center;
+    }
+
+    .btn-primary{
+        background: #ffffff;
+        border-color: #ffffff;
+        margin: 30px;
+    }
+
+    .btn-primary:hover{
+        background: #ffffff;
+        border-color: #ffffff;
+        color: #FB4485;
+    }
+
+    a:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+    }
+
+    a:visited {
+        color: #4d4d4d;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #FB4485;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+
+    a:active {
+        color: yellow;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+</style>
+
+<div style="max-width:500px;margin: 0 auto;font-size: 120%;">
+    <p>
+        My name is Nic Fishman, I'm an undergrad at Stanford University studying machine learning.
+
+        I've lived all over, and eaten good food everywhere. I've run on beaches from Thailand to Nicaragua.
+
+        I love teaching people how to protect themselves, both online and in the real world, as a privacy activist and a martial arts instructor.
+    </p>
+
+    <p>
+        Academically, I'm interested in the spaces we can use machine learning to make people's lives better.
+
+        That means everything from understanding how we can use machine learning to read and write the human genome to keeping data safe from models with long memories.
+
+        I'm working on making machine learning secure at <a href="https://github.com/OpenMined" target="_blank">OpenMined</a>.
+
+        I'm working on understanding structural variation in the genome at the <a href="https://www.genome.gov/12513335/ostrander-group/" target="_blank">Ostrander Lab</a>.
+    </p>
+</div>
+
+<div style="text-align: center;background-color: #ffffff; height:100px;" >
+    <a class="btn btn-primary" href="/static/resume.pdf" role="button">Resume</a>
+    <a class="btn btn-primary" href="/static/cv.pdf" role="button">Acedemic CV</a>
+</div>
+{% endblock %}
