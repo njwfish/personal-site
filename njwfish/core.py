@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort, url_for
+from flask import Blueprint, render_template, abort, url_for, redirect
 from jinja2 import TemplateNotFound
 
 import os
@@ -39,6 +39,12 @@ def contact():
         abort(404)
 
 
+@core.route('/timer')
+def timer():
+    return redirect("https://github.com/njwfish/TimerWidget", code=302)
+
+
+
 @core.route('/projects')
 def projects():
     try:
@@ -49,12 +55,15 @@ def projects():
             if folder[0].split('/')[-1] == "projects":
                 continue
             files = folder[2]
-            assert(len(files) == 2)
+            assert(len(files) == 1 or len(files) == 2)
             dir_info = os.path.join(*folder[0].split('/')[-3:]) + '/'
-            if 'png' in files[0] or 'jpg' in files[0]:
-                projects.append((dir_info + files[0], dir_info + files[1]))
+            if len(files) == 1:
+                projects.append((dir_info + files[0], '/' + folder[0].split('/')[-1]))
             else:
-                projects.append((dir_info + files[1], dir_info + files[0]))
+                if 'png' in files[0] or 'jpg' in files[0]:
+                    projects.append((dir_info + files[0], dir_info + files[1]))
+                else:
+                    projects.append((dir_info + files[1], dir_info + files[0]))
 
         return render_template('projects.html', projects=projects)
     except TemplateNotFound:
