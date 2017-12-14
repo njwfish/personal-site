@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort, url_for, redirect
+from flask import Blueprint, render_template, abort, url_for
 from jinja2 import TemplateNotFound
 
 import os
@@ -53,13 +53,13 @@ def projects():
             assert(len(files) == 1 or len(files) == 2)
             dir_info = os.path.join(*folder[0].split('/')[-3:]) + '/'
             if len(files) == 1:
-                projects.append((dir_info + files[0], 'https://github.com/njwfish/' + folder[0].split('/')[-1]))
+                projects.append((dir_info + files[0], 'https://github.com/njwfish/' + folder[0].split('/')[-1], os.path.getmtime(dir_info)))
             else:
                 if 'png' in files[0] or 'jpg' in files[0]:
-                    projects.append((dir_info + files[0], dir_info + files[1]))
+                    projects.append((dir_info + files[0], dir_info + files[1], os.path.getmtime(dir_info)))
                 else:
-                    projects.append((dir_info + files[1], dir_info + files[0]))
-
+                    projects.append((dir_info + files[1], dir_info + files[0], os.path.getmtime(dir_info)))
+        projects = sorted(projects, key=lambda x: x[2], reverse=True)
         return render_template('projects.html', projects=projects)
     except TemplateNotFound:
         abort(404)

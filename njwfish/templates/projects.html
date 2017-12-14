@@ -130,7 +130,7 @@ li{
 }
 </style>
 
-{% for image, url in projects %}
+{% for image, url, time in projects %}
 <a href={{ url }}>
 <div class="square" style="background-image:url('{{ image }}'); background-size:  100% 100%;">
    <div class="content">
