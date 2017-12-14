@@ -39,11 +39,6 @@ def contact():
         abort(404)
 
 
-@core.route('/timer')
-def timer():
-    return redirect("https://github.com/njwfish/TimerWidget", code=302)
-
-
 
 @core.route('/projects')
 def projects():
@@ -58,7 +53,7 @@ def projects():
             assert(len(files) == 1 or len(files) == 2)
             dir_info = os.path.join(*folder[0].split('/')[-3:]) + '/'
             if len(files) == 1:
-                projects.append((dir_info + files[0], '/' + folder[0].split('/')[-1]))
+                projects.append((dir_info + files[0], 'https://github.com/njwfish/' + folder[0].split('/')[-1]))
             else:
                 if 'png' in files[0] or 'jpg' in files[0]:
                     projects.append((dir_info + files[0], dir_info + files[1]))
