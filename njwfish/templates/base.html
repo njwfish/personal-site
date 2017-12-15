@@ -6,6 +6,7 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/img/favicon.ico" />
     <style>
 
     </style>
@@ -47,6 +48,12 @@
         </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
+{% if active_page == 'index' %}
+<title>about</title>
+{% else %}
+<title>{{ active_page }}</title>
+{% endif %}
+
 <div class="row" style="width:70%;margin-left: 15%;">
 {% block content %}{% endblock %}
 </div>
