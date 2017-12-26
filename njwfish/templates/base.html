@@ -1,9 +1,9 @@
 <html>
 <head>
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/static/js/jquery-latest.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../static/img/favicon.ico" />
@@ -48,6 +48,9 @@
         </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
+
+<i class="fa fa-linkedin"></i>
+
 {% if active_page == 'index' %}
 <title>about</title>
 {% else %}
@@ -66,7 +69,7 @@
         <i class="fa fa-github {{ active_page[:3] }}"></i>
     </a>
     <a href="http://www.linkedin.com/in/njwfish" target="_blank">
-        <i class="fa fa-linkedin {{ active_page[:3] }}"></i>
+        <i class="fa fa-linkedin {{ active_page[:3] }}" aria-hidden="true"></i>
     </a>
     <a href="/">
         <div class="logo {{ active_page[:3] }}" style="alignment: right;"></div>
