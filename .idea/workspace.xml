@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e2f6f99-79a8-4599-a065-99c202910df2" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/css/font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/Lato-Black.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/Lato-BlackItalic.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/Lato-Bold.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/Lato-BoldItalic.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/Lato-Hairline.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/Lato-HairlineItalic.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/Lato-Italic.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/Lato-Light.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/Lato-LightItalic.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/Lato-Regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/Lato/OFL.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/TeX-Gyre-Heros/GUST e-foundry License.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/TeX-Gyre-Heros/texgyreheros-bold.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/TeX-Gyre-Heros/texgyreheros-bolditalic.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/TeX-Gyre-Heros/texgyreheros-italic.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/TeX-Gyre-Heros/texgyreheros-regular.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/TeX-Gyre-Heros/texgyreheroscn-bold.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/TeX-Gyre-Heros/texgyreheroscn-bolditalic.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/TeX-Gyre-Heros/texgyreheroscn-italic.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/njwfish/static/fnt/TeX-Gyre-Heros/texgyreheroscn-regular.otf" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/njwfish/static/style.css" afterPath="$PROJECT_DIR$/njwfish/static/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/njwfish/templates/base.html" afterPath="$PROJECT_DIR$/njwfish/templates/base.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -107,8 +85,8 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/njwfish/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="104" lean-forward="false" selection-start-line="3" selection-start-column="104" selection-end-line="3" selection-end-column="104" />
+            <state relative-caret-position="270">
+              <caret line="18" column="10" lean-forward="true" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
               <folding>
                 <element signature="n#style#0;n#p#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -122,7 +100,7 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/njwfish/static/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
+            <state relative-caret-position="329">
               <caret line="22" column="29" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
               <folding />
             </state>
@@ -1086,14 +1064,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/njwfish/static/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="29" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/njwfish/templates/projects.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -1114,10 +1084,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/njwfish/static/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="22" column="29" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/njwfish/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="104" lean-forward="false" selection-start-line="3" selection-start-column="104" selection-end-line="3" selection-end-column="104" />
+        <state relative-caret-position="270">
+          <caret line="18" column="10" lean-forward="true" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
           <folding>
             <element signature="n#style#0;n#p#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
