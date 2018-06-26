@@ -1,0 +1,3 @@
+/projects/denoising-atac-seq/static/poster.pdf
+/projects/denoising-atac-seq/static/report.pdf
+https://github.com/njwfish/DenoiseATACseq

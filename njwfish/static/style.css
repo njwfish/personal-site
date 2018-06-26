@@ -275,6 +275,32 @@ ul.nav a:hover, ul.nav a:hover p.con {
     color: #FDA333;
 }
 
+ul.nav a:hover, ul.nav a:hover p.pro {
+    color: #6CE0F1;
+}
+
+a h2.pro {
+    color: #6CE0F1;
+    text-decoration-color: #6CE0F1;
+}
+
+a:hover h2.pro {
+    color: #4d4d4d;
+}
+
+a:hover {
+    text-decoration: none;
+    text-decoration-color: #6CE0F1;
+}
+
+ul.nav a:hover, ul.nav a:hover p.abo {
+    color: #FB4485;
+}
+
+ul.nav a:hover, ul.nav a:hover p.con {
+    color: #FDA333;
+}
+
 .navbar .nav > .active > a p.pro {
     color: #6CE0F1;
 }

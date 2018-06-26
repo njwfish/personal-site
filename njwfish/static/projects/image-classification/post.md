@@ -1,0 +1,1 @@
+This is an automated system for downloading a labeled image dataset from Google Images using a list of keywords and then training a vision recognition algorithm on that dataset. THis is a far from perfect methodology, but especially if the downloaded dataset can be supplemented by a validated dev and test set.

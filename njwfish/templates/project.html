@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% set active_page = "projects" %}
+{% block content %}
+
+<div style="max-width:700px;margin: 0 auto;font-size: 130%; line-height: 1.5;">
+
+    <hr>
+
+    <h1>{{ project_name }}</h1>
+
+    <br>
+
+    <div style="column-count: {{ urls|length }}; text-align: center;">
+        {% set span = 0 %}
+        {% for url in urls %}
+            <div style="column-span: {{ span }};">
+                <a class="con" href="{{ url[0] }}">
+                    <h2 class="pro" style="display: inline;">{{ url[1] }}</h2>
+                </a>
+            </div>
+            {% set span = span + 1 %}
+        {% endfor %}
+
+    </div>
+
+    {{ post | safe}}
+
+</div>
+
+{% endblock %}
