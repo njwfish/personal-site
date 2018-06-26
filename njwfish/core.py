@@ -26,9 +26,11 @@ def dated_url_for(endpoint, **values):
 
 @core.route('/')
 @core.route('/index')
+@core.route('/about')
 def index():
     try:
-        return render_template('about.html')
+        post = md_to_html('static/about.md')
+        return render_template('about.html', post=post)
     except TemplateNotFound:
         abort(404)
 
@@ -73,18 +75,12 @@ def project(project_name):
         image = dir_info + 'thumbnail.png'
         url = url_for('.project', project_name=project_name)
         post = md_to_html(dir_info + 'post.md')
-        print('test')
         urls = []
         for url_ in open(dir_info + 'urls.txt', 'r'):
-            print(url_)
             url_ = url_ if url_[0] != '/' else url_for('static', filename=url_[1:])
             url_name = url_.split('/')[2].split('.')[0] if url_[0] != '/' else url_.split('/')[-1].split('.')[0]
             urls.append((url_, url_name))
-        print(urls)
         project_name = project_name.replace('-', ' ')
-
-
-
         return render_template('project.html', project_name=project_name, image=image, url=url, urls=urls, post=post)
     except TemplateNotFound:
         abort(404)

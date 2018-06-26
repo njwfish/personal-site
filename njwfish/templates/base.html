@@ -1,4 +1,5 @@
 <html>
+{% set active_page = active_page|default('index') -%}
 <head>
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -7,23 +8,40 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../static/img/favicon.ico" />
-    <style>
-
-    </style>
 </head>
+<style>
+    {% if 'projects' == active_page %}
+        a, a:link {  color: #6CE0F1;  }
+        a:active {  color: #6CE0F1;  }
+    {% elif 'index' == active_page %}
+        a, a:link, a:visited {  color: #FB4485;  }
+        a:active {  color: #FB4485;  }
+    {% elif 'contact' == active_page %}
+        a {  color: #FDA333;  }
+        a:active {  color: #FDA333;  }
+    {% endif %}
+</style>
 <body>
 <section class="menu gray vhcontainer">
     <div class="container vhcenter">
         <p class="thinfont-menu">nicolas</p><p class="bodyfont-menu">fishman</p>
     </div>
+    <section class="color" style="position: absolute; bottom: 0;">
+        <div class="row">
+            <div class="col-sm-4" style="background-color:#6CE0F1; height: 100%"></div>
+            <div class="col-sm-4" style="background-color:#FB4485; height: 100%"></div>
+            <div class="col-sm-4" style="background-color:#FDA333; height: 100%"></div>
+        </div>
+    </section>
 </section>
+
+
 {% set navigation_bar = [
     ('/projects', 'projects', 'projects'),
     ('/', 'index', 'about'),
     ('/contact', 'contact', 'contact')
 ] -%}
 
-{% set active_page = active_page|default('index') -%}
 <nav class="navbar navbar-default" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -48,6 +66,8 @@
         </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
+
+<div style="margin: auto; width: 700px;"><hr></div>
 
 {% if active_page == 'index' %}
 <title>about</title>
