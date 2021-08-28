@@ -1,9 +1,4 @@
 @font-face {
-    font-family: "Lato";
-    src: url('../static/fonts/Lato/Lato-Light.ttf') format("opentype");
-}
-
-@font-face {
     font-family: "Roboto";
     src: url('../static/fonts/CV/Roboto-Regular.ttf') format("opentype");
 }
@@ -21,6 +16,15 @@
 @font-face {
     font-family: "SourceSansPro";
     src: url('../static/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf') format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SourceSansPro";
+    src: url('../static/fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf') format("opentype");
+    font-weight: 700;
+    font-style: normal;
 }
 
 * {
@@ -56,7 +60,6 @@ body {
     font-size: 16px;
 }
 
-
 .navbar {
     font-family: "SourceSansPro", sans-serif;
 }
@@ -66,13 +69,6 @@ p.thinfont-menu {
     font-size: 40px;
     display: inline;
     color: #333333;
-}
-
-p.thinfont-submenu {
-    font-family: "Lato", serif;
-    font-size: 3vh;
-    display: inline;
-    color: black;
 }
 
 p.thinfont-sub {
@@ -353,4 +349,8 @@ h4 {
 .center {
   margin: auto;
   width: 50%;
+}
+
+ol {
+  padding-left: 40px;
 }
