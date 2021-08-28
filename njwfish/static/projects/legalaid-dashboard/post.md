@@ -1,3 +1,0 @@
-Create a community dashboard that provides an overview of web traffic to all participating community websites to understand need for legal services in different services areas.
-
-Use machine learning to classify legal aid webpages from page contents, then use Google trends to analyze in which areas which topics are trending in which geographies to allow for more resources to be diverted to those topics accordingly.

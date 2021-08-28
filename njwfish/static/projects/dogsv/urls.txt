@@ -1,2 +1,0 @@
-/projects/dogsv/static/report.pdf
-https://github.com/njwfish/DOGSV

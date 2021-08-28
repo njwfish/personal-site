@@ -1,2 +1,0 @@
-/projects/baseball/static/report.pdf
-https://github.com/njwfish/Baseball

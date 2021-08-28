@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, abort, url_for, send_from_director
 import markdown
 import codecs
 from jinja2 import TemplateNotFound
-
+import time
 import os
 
 core = Blueprint('core', __name__,
@@ -35,29 +35,35 @@ def index():
         abort(404)
 
 
-@core.route('/contact')
+@core.route('/resume')
 def contact():
     try:
-        return render_template('contact.html')
+        return send_from_directory('static', 'resume.pdf')
     except TemplateNotFound:
         abort(404)
 
 
-@core.route('/projects')
-def projects():
+@core.route('/words')
+def posts():
     try:
-        projects = []
-        projects_dir = os.path.join(*[os.path.dirname(__file__), 'static', 'projects'])
+        posts = []
+        posts_dir = os.path.join(*[os.path.dirname(__file__), 'static', 'posts'])
 
-        for folder in os.walk(projects_dir):
-            if folder[0].split('/')[-1] == "projects" or folder[0].split('/')[-1] == "static":
+        for folder in os.walk(posts_dir):
+            if folder[0].split('/')[-1] == "posts" or folder[0].split('/')[-1] == "static":
                 continue
             files = folder[2]
+
             dir_info = os.path.join(*folder[0].split('/')[-3:]) + '/'
-            projects.append((dir_info + 'thumbnail.png', url_for('.project', project_name=folder[0].split('/')[-1]),
-                             os.path.getmtime(dir_info)))
-        projects = sorted(projects, key=lambda x: x[2], reverse=True)
-        return render_template('projects.html', projects=projects)
+
+            title = open(dir_info + 'title', "r").read()
+            blurb = open(dir_info + 'blurb', "r").read()
+            posts.append((url_for('.post', post=folder[0].split('/')[-1]),
+                          title, blurb,
+                          time.strftime('%m/%d/%Y', time.gmtime(os.path.getmtime(dir_info)))))
+        print(posts)
+        posts = sorted(posts, key=lambda x: x[2], reverse=True)
+        return render_template('posts.html', posts=posts)
     except TemplateNotFound:
         abort(404)
 
@@ -66,21 +72,13 @@ def md_to_html(md):
     text = input_file.read()
     return markdown.markdown(text)
 
-@core.route('/project/<project_name>')
-def project(project_name):
+@core.route('/words/<post>')
+def post(post):
     try:
-        folder = [os.path.dirname(__file__), 'static', 'projects', project_name]
+        folder = [os.path.dirname(__file__), 'static', 'posts', post]
         dir_info = os.path.join(*folder) + '/'
 
-        image = dir_info + 'thumbnail.png'
-        url = url_for('.project', project_name=project_name)
-        post = md_to_html(dir_info + 'post.md')
-        urls = []
-        for url_ in open(dir_info + 'urls.txt', 'r'):
-            url_ = url_ if url_[0] != '/' else url_for('static', filename=url_[1:])
-            url_name = url_.split('/')[2].split('.')[0] if url_[0] != '/' else url_.split('/')[-1].split('.')[0]
-            urls.append((url_, url_name))
-        project_name = project_name.replace('-', ' ')
-        return render_template('project.html', project_name=project_name, image=image, url=url, urls=urls, post=post)
+        post_text = md_to_html(dir_info + 'main.md')
+        return render_template('post.html', post=post_text)
     except TemplateNotFound:
         abort(404)

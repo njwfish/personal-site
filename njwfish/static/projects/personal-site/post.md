@@ -1,1 +1,0 @@
-This is the code for this website, which is structured using Python, flask and Jinja2 templates, run off of a DigitalOcean instance.

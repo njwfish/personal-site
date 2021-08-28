@@ -8,91 +8,67 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../static/img/favicon.ico" />
+    <script src="{{ url_for('static', filename='my_js.js') }}"></script>
 </head>
-<style>
-    {% if 'projects' == active_page %}
-        a, a:link {  color: #6CE0F1;  }
-        a:active {  color: #6CE0F1;  }
-    {% elif 'index' == active_page %}
-        a, a:link, a:visited {  color: #FB4485;  }
-        a:active {  color: #FB4485;  }
-    {% elif 'contact' == active_page %}
-        a {  color: #FDA333;  }
-        a:active {  color: #FDA333;  }
-    {% endif %}
-</style>
-<body>
-<section class="menu gray vhcontainer">
-    <div class="container vhcenter">
-        <p class="thinfont-menu">nicolas</p><p class="bodyfont-menu">fishman</p>
-    </div>
-    <section class="color" style="position: absolute; bottom: 0; width: 100%;">
-            <div class="row" style="width: 100%; margin: 0;">
-                <div class="col-xs-4 col-sm-4" style="background-color:#6CE0F1; height: 100%"></div>
-                <div class="col-xs-4 col-sm-4" style="background-color:#FB4485; height: 100%"></div>
-                <div class="col-xs-4 col-sm-4" style="background-color:#FDA333; height: 100%"></div>
+<body class>
+<div id="wrap">
+<div class="container">
+    <section class="header">
+        <div class="main-description">
+            <div>
+                <p class="thinfont-menu">Nic</p><p class="bodyfont-menu"> Fishman</p>
+            </div >
+            <div style="margin-top: -10px;">
+                <p class="thinfont-sub">STATISTICS  ·  MACHINE LEARNING  ·  SOCIOLOGY</p>
             </div>
-    </section>
-</section>
-
-
-{% set navigation_bar = [
-    ('/projects', 'projects', 'projects'),
-    ('/', 'index', 'about'),
-    ('/contact', 'contact', 'contact')
-] -%}
-
-<nav class="navbar navbar-default" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div> -->
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" style="margin: auto">
-        <ul class="nav navbar-nav">
-            {% for href, id, caption in navigation_bar %}
-            <li {% if id == active_page %} class="active" {% endif %}>
-                <a href="{{ href|e }}">
-                    <p class="{{ caption[:3] }}" style="display: inline;">{{ caption[:3] }}</p>{{ caption[3:] }}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div><!-- /.navbar-collapse -->
-</nav>
-
-<div style="margin: auto; width: 700px; max-width: 75%"><hr></div>
-
-{% if active_page == 'index' %}
-<title>about</title>
-{% else %}
-<title>{{ active_page }}</title>
-{% endif %}
-
-<div class="row" style="width:70%;margin-left: 15%;">
-{% block content %}{% endblock %}
-</div>
-<footer class="footer">
-    <div style="margin-top: 10px">
-    <a href="http://www.twitter.com/njwfish" target="_blank">
-        <i class="fa fa-twitter {{ active_page[:3] }}"></i>
-    </a>
-    <a href="http://www.github.com/njwfish" target="_blank">
-        <i class="fa fa-github {{ active_page[:3] }}"></i>
-    </a>
-    <a href="http://www.linkedin.com/in/njwfish" target="_blank">
-        <i class="fa fa-linkedin {{ active_page[:3] }}" aria-hidden="true"></i>
-    </a>
-    <a href="/">
-        <div class="logo {{ active_page[:3] }}" style="alignment: right;"></div>
-    </a>
         </div>
+    </section>
+
+    {% set navigation_bar = [
+    ('/', 'index', 'about'),
+    ('/words', 'words', 'words'),
+    ('/resume', 'resume', 'resume'),
+    ] -%}
+    <nav class="navbar" role="navigation">
+
+        <div >
+            <ul class="navbar-list">
+                {% for href, id, caption in navigation_bar %}
+                <li class="navbar-item" >
+                    <a class="navbar-link" href="{{ href|e }}">
+                        {% if id == active_page %}
+                        <p style="color: #DC3522; display: inline;">{{ caption[:3] }}</p><p style="color: #333333; display: inline;">{{ caption[3:] }}</p>
+                        {% else %}
+                        <p style="display: inline;">{{ caption[:3] }}</p><p style="color: #333333; display: inline;">{{ caption[3:] }}</p>
+                        {% endif %}
+
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+
+
+    {% block content %}{% endblock %}
+
+</div>
+</div>
+
+<footer class="footer" id="footer">
+    <div style="width: 900px;max-width: 90%;margin: auto;">
+        <a href="http://www.twitter.com/njwfish" target="_blank">
+            <i class="fa fa-twitter "></i>
+        </a>
+        <a href="http://www.github.com/njwfish" target="_blank">
+            <i class="fa fa-github "></i>
+        </a>
+        <a href="http://www.linkedin.com/in/njwfish" target="_blank">
+            <i class="fa fa-linkedin " aria-hidden="true"></i>
+        </a>
+    </div>
+
 </footer>
+
 </body>
 </html>
