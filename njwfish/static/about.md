@@ -16,7 +16,7 @@ for research purposes.
 
 At the moment I am working with [Kosuke Imai](imai.fas.harvard.edu) on non-parametric approaches for shape constrained heterogeneous
 treatment effect estimation, [Victor Chernozhukov](http://www.mit.edu/~vchern/) on quasi-Bayesian methods in econometrics,
-and the at [Center for Science of Science & Innovation](https://www.kellogg.northwestern.edu/research/science-of-science.aspx)
+and the at the [Center for Science of Science & Innovation](https://www.kellogg.northwestern.edu/research/science-of-science.aspx)
 on how science is funded.
 
 Some of my research also comes out of my time spent working for [Data for Progress](https://www.dataforprogress.org/),
