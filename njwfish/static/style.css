@@ -19,8 +19,8 @@
 }
 
 @font-face {
-    font-family: "Source-Sans-Pro";
-    src: url('../static/fonts/Source_Sans_Pro/SourceSansPro-Black.ttf') format("opentype");
+    font-family: "SourceSansPro";
+    src: url('../static/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf') format("opentype");
 }
 
 * {
@@ -51,14 +51,14 @@ body {
 }
 
 body {
-    font-family: "Source-Sans-Pro", serif;
+    font-family: "SourceSansPro", serif;
     color: #333333;
     font-size: 16px;
 }
 
 
 .navbar {
-    font-family: "Source-Sans-Pro", sans-serif;
+    font-family: "SourceSansPro", sans-serif;
 }
 
 p.thinfont-menu {
@@ -76,7 +76,7 @@ p.thinfont-submenu {
 }
 
 p.thinfont-sub {
-    font-family: "Source-Sans-Pro", serif;
+    font-family: "SourceSansPro", serif;
     font-size: 12px;
     display: inline;
     color: #DC3522;
