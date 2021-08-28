@@ -141,11 +141,11 @@ p.bodyfont-menu {
 
 h4 {
   letter-spacing: .1rem;
-    font-family: Roboto-Bold;
+    font-family: "Roboto-Bold";
 }
 .container {
   width: 900px;
-  max-width: 90%;
+  max-width: 85%;
   overflow: auto;
   padding-bottom: 40px;
 }
@@ -228,7 +228,7 @@ h4 {
 
 
 /* Larger than tablet */
-@media (min-width: 445px) {
+@media (min-width: 320px) {
   /* Navbar */
   .navbar + .docs-section {
     border-top-width: 0; }
