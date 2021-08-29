@@ -22,7 +22,7 @@ on how science is funded.
 Some of my research also comes out of my time spent working for [Data for Progress](https://www.dataforprogress.org/),
 where I try to use computers to push American politics left.
 
-Before stating at Oxford I was an undergrad at Stanford studying Sociology and Computer Science.
+Before starting at Oxford I was an undergrad at Stanford studying Sociology and Computer Science.
 My honors thesis in sociology focused on differences between the theory and practice and the diffusion of both in
 criminal procedure, advised by [John Meyer](https://sociology.stanford.edu/people/john-meyer). I also worked on
 regulatory genomics in [Anshul Kundaje's](https://profiles.stanford.edu/anshul-kundaje) group and social networks and
