@@ -231,7 +231,7 @@ h5 {
 }
 
 /* Larger than phone */
-@media (min-width: 310px) {
+@media (min-width: 330px) {
   /* Navbar */
   .navbar + .docs-section {
     border-top-width: 0; }
@@ -260,7 +260,7 @@ h5 {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: .2rem;
-    margin-right: 15px;
+    margin-right: 20px;
     text-decoration: none;
     line-height: 6.5rem;
     color: #222; }
