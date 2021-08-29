@@ -42,10 +42,10 @@ def resume():
     except TemplateNotFound:
         abort(404)
 
-@core.route('/research')
-def research():
+@core.route('/papers')
+def papers():
     try:
-        return render_template('research.html')
+        return render_template('papers.html')
     except TemplateNotFound:
         abort(404)
 

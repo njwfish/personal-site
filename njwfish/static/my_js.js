@@ -67,11 +67,12 @@ $(document).ready(function() {
   }
 
   function onScroll() {
-    if(navOffsetTop < $window.scrollTop() && !$body.hasClass('has-docked-nav')) {
-      $body.addClass('has-docked-nav')
+    if(navOffsetTop < $window.scrollTop() && !$body.hasClass('has-docked-nav') &&
+        (document.getElementById('footer').getBoundingClientRect().top > $(window).height() + $(window).scrollTop())) {
+      $body.addClass('has-docked-nav');
     }
     if(navOffsetTop > $window.scrollTop() && $body.hasClass('has-docked-nav')) {
-      $body.removeClass('has-docked-nav')
+      $body.removeClass('has-docked-nav');
     }
   }
 
