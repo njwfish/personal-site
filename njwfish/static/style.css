@@ -139,6 +139,12 @@ h4 {
   letter-spacing: .1rem;
     font-family: "Roboto-Bold";
 }
+
+h5 {
+  letter-spacing: .1rem;
+    font-family: "Roboto-Bold";
+    font-size: 18px;
+}
 .container {
   width: 900px;
   max-width: 85%;
@@ -353,4 +359,19 @@ h4 {
 
 ol {
   padding-left: 40px;
+}
+
+h4 {
+    overflow: hidden;
+}
+
+h4:after {
+    content:"";
+    display: inline-block;
+    height: 0;
+    vertical-align: bottom;
+    width: 100%;
+    margin-right: -100%;
+    margin-left: 5px;
+    border-top: 1px solid black;
 }

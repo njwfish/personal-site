@@ -36,9 +36,16 @@ def index():
 
 
 @core.route('/resume')
-def contact():
+def resume():
     try:
         return send_from_directory('static', 'resume.pdf')
+    except TemplateNotFound:
+        abort(404)
+
+@core.route('/research')
+def research():
+    try:
+        return render_template('research.html')
     except TemplateNotFound:
         abort(404)
 
@@ -61,7 +68,6 @@ def posts():
             posts.append((url_for('.post', post=folder[0].split('/')[-1]),
                           title, blurb,
                           time.strftime('%m/%d/%Y', time.gmtime(os.path.getmtime(dir_info)))))
-        print(posts)
         posts = sorted(posts, key=lambda x: x[2], reverse=True)
         return render_template('posts.html', posts=posts)
     except TemplateNotFound:

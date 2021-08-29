@@ -1,4 +1,4 @@
-#### About
+##### About
 
 I'm currently at Oxford studying mathematics and the history of science on a Rhodes Scholarship.
 
@@ -29,4 +29,4 @@ regulatory genomics in [Anshul Kundaje's](https://profiles.stanford.edu/anshul-k
 socioeconomic segregation with [David Grusky](https://sociology.stanford.edu/people/david-grusky) and
 [Jure Leskovec](https://cs.stanford.edu/people/jure/).
 
-You can reach me at njwfish [at] gmail.com.
+You can find a more complete resume [here](resume), and you can reach me at njwfish [at] gmail.com.

@@ -10,7 +10,8 @@ table {
 
 th, td {
   text-align: left;
-  padding: 8px;
+    vertical-align:top;
+  padding: 5px;
 }
 
 </style>
@@ -18,7 +19,7 @@ th, td {
 <table>
 {% for url, title, blurb, time in posts %}
 <tr>
-    <td><h4><a href={{ url }}>{{ title | safe}}</a> </h4> {{ blurb | safe}}</td>
+    <td><h5><a href={{ url }}>{{ title | safe}}</a></h5> {{ blurb | safe}}</td>
     <td style="text-align: right"> {{ time }} </td>
 </tr>
 {% endfor %}
