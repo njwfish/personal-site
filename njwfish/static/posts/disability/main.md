@@ -1,4 +1,4 @@
-#### Being disabled as a student in college
+##### Being disabled as a student in college
 
 Being disabled in the academy absolutely sucks. I have three very brief pieces of advice.
 
