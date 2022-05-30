@@ -30,4 +30,4 @@ Necessarily there will be a point where two rafts built out from different start
 I hope the two objections I have sketched illuminate the tension in Kuhn’s concept of incommensurability, his view of specialization, and his views on assimilation. The tension is not unresolvable by any means, but the empirical realities of specialization and assimilation severely limit the practical implications for his theory of incommensurability.
 
 [1]:	/static/posts/incommensurability/kuhn-structure.pdf
-[2]:	/static/posts/incommensurability/fleck-genesispdf
+[2]:	/static/posts/incommensurability/fleck-genesis.pdf
