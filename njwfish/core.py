@@ -65,9 +65,13 @@ def posts():
 
             title = open(dir_info + 'title', "r").read()
             blurb = open(dir_info + 'blurb', "r").read()
-            posts.append((url_for('.post', post=folder[0].split('/')[-1]),
-                          title, blurb,
-                          time.strftime('%m/%d/%Y', time.gmtime(os.path.getmtime(dir_info)))))
+            posts.append(
+                (
+                    url_for('.post', post=folder[0].split('/')[-1]),
+                    title, blurb,
+                    time.strftime('%m/%d/%Y', time.gmtime(os.path.getmtime(dir_info)))
+                )
+            )
         posts = sorted(posts, key=lambda x: x[2], reverse=True)
         return render_template('posts.html', posts=posts)
     except TemplateNotFound:
@@ -83,8 +87,11 @@ def post(post):
     try:
         folder = [os.path.dirname(__file__), 'static', 'posts', post]
         dir_info = os.path.join(*folder) + '/'
-
-        post_text = md_to_html(dir_info + 'main.md')
+        if os.path.exists(dir_info + 'main.html'):
+            input_file = codecs.open(dir_info + 'main.html', mode="r", encoding="utf-8")
+            post_text = input_file.read()
+        else:
+            post_text = md_to_html(dir_info + 'main.md')
         return render_template('post.html', post=post_text)
     except TemplateNotFound:
         abort(404)
