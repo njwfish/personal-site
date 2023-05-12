@@ -1,0 +1,152 @@
+<p>I was reading Amartya Sen’s exposition of Buridan’s ass in his
+excellent essay “Behaviour and the Concept of Preference” and it got me
+thinking about the revealed preference approach with computationally
+bounded agents. Sen writes:</p>
+<blockquote>
+<p>[Buridan’s] ass, as we all know, could not make up its mind between
+two haystacks; it liked both very much but could not decide which one
+was better. Being unable to choose, this dithering animal died
+ultimately of starvation. The dilemma of the ass is easy to understand,
+but it is possible that the animal would have agreed that it would have
+been better off by choosing either of the haystacks rather than nothing
+at all. Not choosing anything is also a choice, and in this case this
+really meant the choice of starvation. On the other hand, had it chosen
+either of the haystacks, it would have been presumed that the ass
+regarded that haystack to be at least as good as the other, which in
+this version of the story was not the case. The ass was in a real
+dilemma vis-a-vis the revealed preference approach.</p>
+</blockquote>
+<p>The core idea I’m interested in here is whether computational bounds
+restrict our ability to learn agents actual preferences since agents do
+not actually make optimal decisions in practice. In this short post I
+mostly just pose questios thinking about this issue through a classic
+NP-hard problem (the knapsack problem), but the particular problem isn’t
+really relevant. Really I start from the premises that: 1. there is
+private preference information we want to infer from behaviour
+alone<br />
+2. the agent is trying to solve a “hard” and so they approximate a
+solution rather than solving it optimally 3. we can repeatedly ask the
+agent to solve variants of the problem to observe their behaviour in
+different situations and ask how well and how quickly we can learn the
+agents private preferences (contrasted against the case where we know
+the agent is playing optimally) and taking the ass’s perspective,
+so-to-speak, we can also ask whether there are strategies an agent could
+deploy in this repeated context which could signal its true preferences
+under computational constraints.</p>
+<hr />
+<p>Assume we have an agent which maximizes their utility under a budget
+constraint <span class="math inline"><em>B</em></span> over a set <span
+class="math inline"><em>K</em></span> items denoted <span
+class="math inline"><em>S</em></span> with costs <span
+class="math inline"><em>c</em><sub>1</sub>, …, <em>c</em><sub><em>K</em></sub></span>
+and private utilities <span
+class="math inline"><em>u</em><sub>1</sub>, …, <em>u</em><sub><em>K</em></sub></span>.
+That is the agent optimizes the set <span
+class="math inline"><em>I</em></span>:</p>
+<p><span
+class="math display"><em>I</em><sup>*</sup> = max<sub><em>I</em> ⊆ <em>S</em></sub>∑<sub><em>i</em> ∈ <em>I</em></sub><em>u</em><sub><em>i</em></sub>
+s.t.
+∑<sub><em>i</em> ∈ <em>I</em></sub><em>c</em><sub><em>i</em></sub> ≤ <em>B</em></span></p>
+<p>That is the agent is playing a knapsack problem. We can observe the
+costs of each item, the budget the agent operates under, and the set the
+agent selects <span class="math inline"><em>I</em><sup>*</sup></span>.
+We cannot observe the agents private utilities.</p>
+<p>Now let’s assume we can query the agent with a given budget <span
+class="math inline"><em>b</em> ∈ ℝ</span> and a given subset of elements
+<span class="math inline"><em>s</em> ⊆ <em>S</em></span> and observe
+their response <span
+class="math inline"><em>I</em><sup>*</sup>(<em>s</em>,<em>b</em>)</span>.
+Note that in general we cannot recover an agent’s exact private
+utilities: consider the case where <span
+class="math inline"><em>S</em> = {(<em>w</em><sub>1</sub>=1,<em>u</em><sub>1</sub>=1), (<em>w</em><sub>2</sub>=1,<em>u</em><sub>2</sub>=0)}</span>.
+Here we can only recover the fact that <span
+class="math inline"><em>u</em><sub>1</sub> &gt; <em>u</em><sub>2</sub></span>
+but cannot gain any more information. We must set our sights slightly
+lower then and restrict our interest to being able to exactly
+reconstruct the function <span
+class="math inline"><em>I</em><sup>*</sup></span> over all possible sets
+and budgets.</p>
+<h5 id="what-is-the-query-complexity-to-exactly-recover-i">1. What is
+the query complexity to exactly recover <span
+class="math inline"><em>I</em><sup>*</sup></span>?</h5>
+<p>This is clearly a question in the tradition of dicrete choice theory
+and computation and is interesting in its own right. It is far from
+trivial! Obviously we could query the product of all possible subsets
+and all possible budgets but it seems we should be able to do better
+than this given our knowledge of the problem.</p>
+<p>In the spirit of Buridan’s ass I want to go further though and asking
+another question. We know the optimization variant of the knapsack
+problem is at least NP-hard, so we might not expect our agent to be able
+to compute the optimal <span
+class="math inline"><em>I</em><sup>*</sup></span>. Instead we might
+assume that our agent uses a deterministic unknown polynomial-time
+algorithm <span
+class="math inline"><em>A</em> : 𝒫(<em>S</em>) × ℝ → 𝒫(<em>S</em>)</span>
+to select their set rather than always solving the full knapsack problem
+above. We will assume <span class="math inline"><em>A</em></span> is in
+a known class of algorithms <span class="math inline">𝒜</span> Now we
+can pose the really interesting questions:</p>
+<h5
+id="under-what-conditions-on-mathcala-can-we-characterize-the-query-complexity-to-exactly-recover-a">2.
+Under what conditions on <span class="math inline">𝒜</span> can we
+characterize the query complexity to exactly recover <span
+class="math inline"><em>A</em></span>?</h5>
+<p>This question what classes of approximation are query-recoverable in
+better than worst case (enumerate all subsets and all budgets) time. For
+example if we know <span class="math inline"><em>A</em></span> is a
+1/2-approximation (e.g. the selected set is always at least half as good
+as the optimal set) then maybe we can do better than worst case query
+complexity. Or maybe not. It is not obvious to me!</p>
+<h5
+id="under-what-conditions-on-mathcala-can-we-recover-i-from-queries-to-the-agent">3.
+Under what conditions on <span class="math inline">𝒜</span> can we
+recover <span class="math inline"><em>I</em><sup>*</sup></span> from
+queries to the agent?</h5>
+<p>This is of course the big question. Maybe the most interesting
+starting place would be to consider with some arbitrarily small <span
+class="math inline"><em>ϵ</em> ∈ (0, 1]</span> and let <span
+class="math inline">𝒜 = <em>A</em></span> be a <em>known</em> <span
+class="math inline">(1−<em>ϵ</em>)</span>-approximation where the
+selected set is always at least <span
+class="math inline">1 − <em>ϵ</em></span> as good as the optimal set. In
+this highly restricted case can we recover <span
+class="math inline"><em>I</em><sup>*</sup></span>? This leads to the
+next question:</p>
+<h5
+id="given-a-class-of-algorithms-mathcala-what-is-the-best-1-epsilon-approximation-we-can-recover-for-the-worst-case-a-in-mathcala">4.
+Given a class of algorithms <span class="math inline">𝒜</span> what is
+the best <span class="math inline">(1−<em>ϵ</em>)</span>-approximation
+we can recover for the worst-case <span
+class="math inline"><em>A</em> ∈ 𝒜</span>?</h5>
+<p>Here we relax our dreams of recovering <span
+class="math inline"><em>I</em><sup>*</sup></span> and instead ask what
+the best recoverable approximation will be for a given class. And of
+course there are query complexity analogues of both (2) and (3).</p>
+<p>These questions are quite important from the perspective of what we
+can learn about the preferences of computaionally bounded agents from
+their behavior alone. My intuition is that there are more negative than
+positive results here, but those negative results are important! It
+would imply that revealed preference approaches are seriously undermined
+by computational constraints. And of course positive results would also
+be welcome as they might lead to better econometric methods for studying
+people’s preferences.</p>
+<p>Additionally we can flip the question on its head and ask whether
+there are ways an agent can select items to signal their preferences to
+an observer:</p>
+<h5
+id="if-we-are-an-agent-and-we-know-there-is-a-computationally-unbounded-observer-trying-to-understand-our-preferences-via-their-queries-can-we-somehow-signal-our-true-preferences-via-our-selections-under-our-computational-constraints">5.
+If we are an agent and we know there is a computationally unbounded
+observer trying to understand our preferences via their queries can we
+somehow signal our true preferences via our selections under our
+computational constraints?</h5>
+<p>This last question is the least well formed of the four, but it would
+be particularly interesting if there were effective strategies
+computationally bounded agents could use to signal their preferences,
+especially if they involved deviating from the utility maximizing
+strategy!</p>
+<hr />
+<p>In any case I think this is a super interesting direction for folks
+at the intersection of economics and computation to think in, offering
+both interesting puzzles and relevant conclusions. I have not seen any
+work doing something like this, but if anyone knows of anything please
+let me know!</p>
