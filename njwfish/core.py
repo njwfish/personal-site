@@ -87,7 +87,7 @@ def post(post):
     try:
         folder = [os.path.dirname(__file__), 'static', 'posts', post]
         dir_info = os.path.join(*folder) + '/'
-        if os.path.exists(dir_info + 'main.html'):
+        if os.path.isfile(dir_info + 'main.html'):
             input_file = codecs.open(dir_info + 'main.html', mode="r", encoding="utf-8")
             post_text = input_file.read()
         else:
