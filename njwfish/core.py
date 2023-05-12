@@ -78,7 +78,7 @@ def posts():
         abort(404)
 
 def md_to_html(md):
-    input_file = codecs.open(md, mode="r", encoding="utf-8")
+    input_file = codecs.open(md, mode="r", encoding="unicode")
     text = input_file.read()
     return markdown.markdown(text)
 
@@ -88,7 +88,7 @@ def post(post):
         folder = [os.path.dirname(__file__), 'static', 'posts', post]
         dir_info = os.path.join(*folder) + '/'
         if os.path.exists(dir_info + 'main.html'):
-            input_file = codecs.open(dir_info + 'main.html', mode="r", encoding="utf-8")
+            input_file = codecs.open(dir_info + 'main.html', mode="r", encoding="unicode")
             post_text = input_file.read()
         else:
             post_text = md_to_html(dir_info + 'main.md')
