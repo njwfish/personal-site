@@ -72,13 +72,13 @@ def posts():
                     time.strftime('%m/%d/%Y', time.gmtime(os.path.getmtime(dir_info)))
                 )
             )
-        posts = sorted(posts, key=lambda x: x[-1], reverse=True)
+        posts = sorted(posts, key=lambda x: x[-1], reverse=False)
         return render_template('posts.html', posts=posts)
     except TemplateNotFound:
         abort(404)
 
 def md_to_html(md):
-    input_file = codecs.open(md, mode="r", encoding="unicode")
+    input_file = codecs.open(md, mode="r", encoding="utf-8")
     text = input_file.read()
     return markdown.markdown(text)
 
