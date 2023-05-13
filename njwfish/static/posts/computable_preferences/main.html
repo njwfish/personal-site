@@ -117,10 +117,11 @@ selected set is always at least <span
 class="math inline">\(1-\epsilon\)</span> as good as the optimal set. In
 this highly restricted case can we recover <span
 class="math inline">\(I^*\)</span>? A particularly easy case would be to 
-take <span class="math inline">\(\mathcal{A}\)</span> to be the optimal
-algorithm <span class="math inline">\(I^*\)</span> where 
-<span class="math inline">\(1-\epsilon\)</span> of the time the agent uniformly at random
-select elements until they hit their budget constraint. In this case I
+take <span class="math inline">\(\mathcal{A} = A\)</span> to be a mixture of 
+the optimal algorithm <span class="math inline">\(I^*\)</span> and a 
+uniform strategy where with probability <span class="math inline">
+\(P(1-\delta)\)</span> the agent randomly selects elements until 
+they hit their budget constraint. In this case I
 think we should be able to recover <span class="math inline">\(I^*\)</span>
 by classic results in statistical learning, but it is not really in the spirit
 of our agent acting under computational constraints. And in fact it seems likely
