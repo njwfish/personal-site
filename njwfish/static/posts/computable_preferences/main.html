@@ -21,23 +21,24 @@ this version of the story was not the case. The ass was in a real
 dilemma vis-a-vis the revealed preference approach.</p>
 </blockquote>
 <p>The core idea I’m interested in here is whether computational bounds
-restrict our ability to learn agents actual preferences since agents do
+restrict our ability to learn agents' true preferences since agents do
 not actually make optimal decisions in practice. In this short post I
-mostly just pose questios thinking about this issue through a classic
-NP-hard problem (the knapsack problem), but the particular problem isn’t
-really relevant. Really I start from the premises that:</p>
+mostly just pose questions thinking about this issue through a classic
+NP-hard problem (the knapsack problem), but the specific problem isn’t
+important. Really I start from the premises that:</p>
 <ol type="1">
 <li>there is private preference information we want to infer from
 behaviour alone<br />
 </li>
-<li>the agent is trying to solve a “hard” and so they approximate a
+<li>the agent is trying to solve a “hard” problem and so they approximate a
 solution rather than solving it optimally</li>
 <li>we can repeatedly ask the agent to solve variants of the problem to
 observe their behaviour in different situations</li>
 </ol>
-<p>and ask how well and how quickly we can learn the agents private
+<p>and ask how well and how quickly we can learn the agent's private
 preferences (contrasted against the case where we know the agent is
-playing optimally) and taking the ass’s perspective, so-to-speak, we can
+playing optimally where this is presumptively more straingtforward).
+Taking the ass’s perspective, so-to-speak, we can
 also ask whether there are strategies an agent could deploy in this
 repeated context which could signal its true preferences under
 computational constraints.</p>
@@ -47,18 +48,18 @@ constraint <span class="math inline">\(B\)</span> over a set <span
 class="math inline">\(K\)</span> items denoted <span
 class="math inline">\(S\)</span> with costs <span
 class="math inline">\(c_1, \dots, c_K\)</span> and private utilities
-<span class="math inline">\(u_1, \dots, u_K\)</span>. That is the agent
-optimizes the set <span class="math inline">\(I\)</span>:</p>
+<span class="math inline">\(u_1, \dots, u_K\)</span>:</p>
 <p><span class="math display">\[
 \begin{align}
 I^* = \max_{I \subseteq S} &amp;\sum_{i \in I} u_i \\
 \text{ s.t. } &amp;\sum_{i \in I} c_i \leq B
 \end{align}
 \]</span></p>
-<p>That is the agent is playing a knapsack problem. We can observe the
+<p>That is the agent is playing a knapsack problem optimizing the subset 
+of goods they buy with their budget. We can observe the
 costs of each item, the budget the agent operates under, and the set the
 agent selects <span class="math inline">\(I^*\)</span>. We cannot
-observe the agents private utilities.</p>
+observe the agents private utilities.</p>
 <p>Now let’s assume we can query the agent with a given budget <span
 class="math inline">\(b \in \mathbb{R}\)</span> and a given subset of
 elements <span class="math inline">\(s \subseteq S\)</span> and observe
@@ -67,26 +68,26 @@ in general we cannot recover an agent’s exact private utilities:
 consider the case where <span class="math inline">\(S = \{(w_1=1,
 u_1=1), (w_2=1,u_2=0)\}\)</span>. Here we can only recover the fact that
 <span class="math inline">\(u_1 &gt; u_2\)</span> but cannot gain any
-more information. We must set our sights slightly lower then and
-restrict our interest to being able to exactly reconstruct the function
+more information. We must set our sights slightly lower and
+instead aim to exactly reconstruct the function
 <span class="math inline">\(I^*\)</span> over all possible sets and
 budgets.</p>
 <h5 id="what-is-the-query-complexity-to-exactly-recover-i">1. What is
 the query complexity to exactly recover <span
 class="math inline">\(I^*\)</span>?</h5>
-<p>This is clearly a question in the tradition of dicrete choice theory
+<p>This is clearly a question in the tradition of revealed preference theory
 and computation and is interesting in its own right. It is far from
 trivial! Obviously we could query the product of all possible subsets
 and all possible budgets but it seems we should be able to do better
-than this given our knowledge of the problem.</p>
-<p>In the spirit of Buridan’s ass I want to go further though and asking
-another question. We know the optimization variant of the knapsack
+than this given our knowledge of the agents strategy.</p>
+<p>In the spirit of Buridan’s ass I want to go further though, asking a
+trickier question. We know the optimization variant of the knapsack
 problem is at least NP-hard, so we might not expect our agent to be able
-to compute the optimal <span class="math inline">\(I^*\)</span>. Instead
-we might assume that our agent uses a deterministic unknown
+to compute the optimal <span class="math inline">\(I^*\)</span> for all 
+(sub)sets and budgets. Instead we might assume that our agent uses an unknown
 polynomial-time algorithm <span class="math inline">\(A: \mathcal{P}(S)
 \times \mathbb{R} \rightarrow \mathcal{P}(S)\)</span> to select their
-set rather than always solving the full knapsack problem above. We will
+set rather than solving the full knapsack problem above. We will
 assume <span class="math inline">\(A\)</span> is in a known class of
 algorithms <span class="math inline">\(\mathcal{A}\)</span> Now we can
 pose the really interesting questions:</p>
@@ -96,10 +97,10 @@ Under what conditions on <span
 class="math inline">\(\mathcal{A}\)</span> can we characterize the query
 complexity to exactly recover <span
 class="math inline">\(A\)</span>?</h5>
-<p>This question what classes of approximation are query-recoverable in
-better than worst case (enumerate all subsets and all budgets) time. For
+<p>This question gets at which classes of approximation are query-recoverable in
+better than worst case (enumerate all subsets and all budgets) queries. For
 example if we know <span class="math inline">\(A\)</span> is a
-1/2-approximation (e.g. the selected set is always at least half as good
+1/2-approximation (e.g. the selected set is always at least half as good
 as the optimal set) then maybe we can do better than worst case query
 complexity. Or maybe not. It is not obvious to me!</p>
 <h5
@@ -115,17 +116,26 @@ class="math inline">\((1-\epsilon)\)</span>-approximation where the
 selected set is always at least <span
 class="math inline">\(1-\epsilon\)</span> as good as the optimal set. In
 this highly restricted case can we recover <span
-class="math inline">\(I^*\)</span>? This leads to the next question:</p>
+class="math inline">\(I^*\)</span>? A particularly easy case would be to 
+take <span class="math inline">\(\mathcal{A}\)</span> to be the optimal
+algorithm <span class="math inline">\(I^*\)</span> where 
+<span class="math inline">\(1-\epsilon\)</span> of the time the agent uniformly at random
+select elements until they hit their budget constraint. In this case I
+think we should be able to recover <span class="math inline">\(I^*\)</span>
+by classic results in statistical learning, but it is not really in the spirit
+of our agent acting under computational constraints. And in fact it seems likely
+that for many classes of algorithms we cannot in fact recover <span class="math inline">\(I^*\)</span>.
+This leads to the next question:</p>
 <h5
 id="given-a-class-of-algorithms-mathcala-what-is-the-best-1-epsilon-approximation-we-can-recover-for-the-worst-case-a-in-mathcala">4.
-Given a class of algorithms <span
-class="math inline">\(\mathcal{A}\)</span> what is the best <span
+Given a class of algorithms what is the best <span
 class="math inline">\((1-\epsilon)\)</span>-approximation we can recover
 for the worst-case <span class="math inline">\(A \in
 \mathcal{A}\)</span>?</h5>
 <p>Here we relax our dreams of recovering <span
 class="math inline">\(I^*\)</span> and instead ask what the best
-recoverable approximation will be for a given class. And of course there
+recoverable approximation will be for a given  <span
+class="math inline">\(\mathcal{A}\)</span>. And of course there
 are query complexity analogues of both (2) and (3).</p>
 <p>These questions are quite important from the perspective of what we
 can learn about the preferences of computaionally bounded agents from
