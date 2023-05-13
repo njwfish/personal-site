@@ -5,8 +5,9 @@ from jinja2 import TemplateNotFound
 import time
 import os
 
-core = Blueprint('core', __name__,
-                 template_folder='templates')
+core = Blueprint(
+    'core', __name__, template_folder='templates'
+)
 
 
 @core.context_processor
@@ -18,8 +19,9 @@ def dated_url_for(endpoint, **values):
     if endpoint == 'static':
         filename = values.get('filename', None)
         if filename:
-            file_path = os.path.join(core.root_path,
-                                     endpoint, filename)
+            file_path = os.path.join(
+                core.root_path, endpoint, filename
+            )
             values['q'] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)
 
@@ -87,11 +89,14 @@ def post(post):
     try:
         folder = [os.path.dirname(__file__), 'static', 'posts', post]
         dir_info = os.path.join(*folder) + '/'
+        title = open(dir_info + 'title', "r").read()
+        blurb = open(dir_info + 'blurb', "r").read()
         if os.path.isfile(dir_info + 'main.html'):
             input_file = codecs.open(dir_info + 'main.html', mode="r", encoding="utf-8")
             post_text = input_file.read()
         else:
             post_text = md_to_html(dir_info + 'main.md')
-        return render_template('post.html', post=post_text)
+
+        return render_template('post.html', title=title, description=blurb, post=post_text)
     except TemplateNotFound:
         abort(404)
