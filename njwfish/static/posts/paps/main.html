@@ -37,13 +37,12 @@ pre-analysis plans is that the researcher can pre-register a random
 forest specification and then reviewers can be confident they didn’t
 tune the parameters to get the results they want, since they didn’t have
 the data when they pre-registered their analysis plan.</p>
-<p>That’s the real trick: <strong>PAPs free us from linear
-regression.</strong> They decouple the complexity of a research design
-and the number of data-dependent researcher degrees of freedom. And
-data-dependent researcher degrees of freedom are the problem! So PAPs
-enable researchers use sophisticated econometric techniques without
-running into the problem of reviewer’s (often reasonable!)
-disbelief.</p>
+<p>That’s the real trick: <em>PAPs free us from linear regression.</em>
+They decouple the complexity of a research design and the number of
+data-dependent researcher degrees of freedom. And data-dependent
+researcher degrees of freedom are the problem! So PAPs enable
+researchers use sophisticated econometric techniques without running
+into the problem of reviewer’s (often reasonable!) disbelief.</p>
 <p>The more common way of pitching PAPs is by saying they control
 p-hacking and specification search. I think this is not a particularly
 useful way to think about PAPs, since PAPs don’t generally solve these
@@ -79,8 +78,8 @@ the consistent case</h2>
 class="math inline">\(p\)</span>-dimensional covariates vectors <span
 class="math inline">\(X_i\)</span>. They run an experiment, randomly
 assigning treatments <span class="math inline">\(T_i \sim
-Bern(½)\)</span> to the population. After the experiment they observe an
-outcome <span class="math inline">\(Y_i\)</span>.</p>
+\text{Bern}(\frac12)\)</span> to the population. After the experiment
+they observe an outcome <span class="math inline">\(Y_i\)</span>.</p>
 <p>We can assume a simple linear model for the outcome:</p>
 <p><span class="math display">\[Y_i = \tau T_i + \beta X_i +
 \epsilon_i\]</span></p>
