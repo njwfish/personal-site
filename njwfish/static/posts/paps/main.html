@@ -9,12 +9,13 @@ just pursuing the ideal of truth, but also competing in the cut-throat
 academic market, and as such their incentives are not to figure out
 whats true, but rather to get publishable results.<a href="#fn1"
 class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
-Pre-analysis plans are one way to align these goals, as Kasy and Spiess
-[1] argue in a recently revised paper. I think this is a nice paper! But
-this post is an argument that they miss some central elements of PAPs
-which I think are important to understanding their when they work and
-when they don’t. You don’t have to have read their paper to read this
-post, it should stand on its own (but the paper is very readable!).</p>
+Pre-analysis plans are one way to align these goals, as <a
+href="https://arxiv.org/abs/2208.09638">Kasy and Spiess</a> [1] argue in
+a recently revised paper. I think this is a nice paper! But this post is
+an argument that they miss some central elements of PAPs which I think
+are important to understanding their when they work and when they don’t.
+You don’t have to have read their paper to read this post, it should
+stand on its own (but the paper is very readable!).</p>
 <p>The tl;dr is that PAPs are great when the estimator is gaurunteed to
 be consistent since they allow the researcher to use complex analysis
 pipelines. But when the estimator might be inconsistent estimator it’s
@@ -105,8 +106,7 @@ all these intuitions below.</p>
 class="math inline">\(T_i\)</span> they can just consider the truncated
 regression:</p>
 <p><span class="math display">\[ Y_i = \tau T_i +
-\epsilon&#39;_i\]</span></p>
-<p>And this is a consistent estimator (since <span
+\epsilon&#39;_i\]</span> And this is a consistent estimator (since <span
 class="math inline">\(T_i \perp X_i, Y(0), Y(1)\)</span>). But this will
 not maximize the chance they reject the null.</p>
 <p>If the researcher does not pre-register their analysis they might
@@ -157,7 +157,7 @@ class="math inline">\(Z_i\)</span> to our model and consider the case
 where the researcher is interested in the heterogenous treatment
 effect:</p>
 <p><span class="math display">\[Y_i = \tau T_i + \beta X_i + \zeta Z_i +
-\gamma T_i Z_i + \epsilon_i  \]</span></p>
+\gamma T_i Z_i + \epsilon_i \]</span></p>
 <p>Where the researcher wants to test the null <span
 class="math inline">\(H_0: \gamma = 0\)</span> against <span
 class="math inline">\(H_1: \gamma \neq 0\)</span>. But we have not
@@ -259,8 +259,9 @@ is great for econometricians and statisticians who have specialized in
 nailing the estimator, given the model. Opportunities for important
 collaborations abound!</p>
 <p>[1] Kasy, Maximilian, and Jann Spiess. “Rationalizing Pre-Analysis
-Plans: Statistical Decisions Subject to Implementability.” <em>arXiv
-preprint arXiv:2208.09638</em> (2022).</p>
+Plans: Statistical Decisions Subject to Implementability.” <a
+href="https://arxiv.org/abs/2208.09638"><em>arXiv preprint
+arXiv:2208.09638</em></a> (2022).</p>
 <aside id="footnotes" class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
