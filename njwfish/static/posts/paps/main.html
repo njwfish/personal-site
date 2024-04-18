@@ -16,23 +16,25 @@ an argument that they miss some central elements of PAPs which I think
 are important to understanding their when they work and when they don’t.
 You don’t have to have read their paper to read this post, it should
 stand on its own (but the paper is very readable!).</p>
-<p>The tl;dr is that PAPs are great when the estimator is gaurunteed to
+<p>The tl;dr is that PAPs are great when the estimator is guaranteed to
 be consistent since they allow the researcher to use complex analysis
-pipelines. But when the estimator might be inconsistent estimator it’s
-unclear whether or how PAPs are helpful at all!</p>
+pipelines. But when the estimator might be inconsistent it’s unclear
+whether or how PAPs are helpful at all!</p>
 <p>Now, before diving in its worth stepping back: PAPs are a relatively
 recent innovation, so how did social scientists manage these misaligned
 incentices before they were widespread?</p>
-<p>One way was by forcing everyone to use linear regression. The
-simplicity of linear regression allows practitioners to have clear
-intuitions about what is reasonable in any given study. If we imagine
-that the workhorse of social science was random forests, where there are
-many tuning parameters which matter a lot to the kinds of results you
-get, we would be much more worried that researchers tried every possible
-tweak to get the results they want.<a href="#fn2" class="footnote-ref"
-id="fnref2" role="doc-noteref"><sup>2</sup></a> I’ll call this kind of
-p-hacking specification searching, and its the main thing I’m focused on
-in this post.</p>
+<p>One way was by forcing everyone to use linear regression.<a
+href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a> The simplicity of linear regression
+allows practitioners to have clear intuitions about what is reasonable
+in any given study. If we imagine that the workhorse of social science
+was random forests, where there are many tuning parameters which matter
+a lot to the kinds of results you get, we would be much more worried
+that researchers tried every possible tweak to get the results they
+want.<a href="#fn3" class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a> I’ll call this kind of p-hacking
+specification searching, and its the main thing I’m focused on in this
+post.</p>
 <p>Specification search is less of a problem in linear regression
 because there are fewer degrees of freedom. Restricting research to use
 linear regression is a way to try to constrain researchers to produce
@@ -81,9 +83,7 @@ statistics/econometrics it is always possible the data confounds our
 priors and our pre-specified plan ends up seeming naive ex post. I think
 this is maybe the most interesting statistical question about PAPs: how
 do we think about ex post changes or adaptations?</p>
-<p>Now on to the math!</p>
-<h2 id="a-simple-experiment---the-consistent-case">A simple experiment -
-the consistent case</h2>
+<p>Now on to the math! ## A simple experiment - the consistent case</p>
 <p>A researcher has a population of individuals with <span
 class="math inline">\(p\)</span>-dimensional covariates vectors <span
 class="math inline">\(X_i\)</span>. They run an experiment, randomly
@@ -117,8 +117,8 @@ class="math inline">\(S_i\)</span> of <span
 class="math inline">\(X_i\)</span>, picking the subset of covariates to
 include that results in the smallest p-value for <span
 class="math inline">\(\hat \tau\)</span>. This will invalidate the
-hypothesis test,<a href="#fn3" class="footnote-ref" id="fnref3"
-role="doc-noteref"><sup>3</sup></a> so instead we can force the
+hypothesis test,<a href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a> so instead we can force the
 researcher to pre-register the subset of covariates they will include in
 the regression <span class="math inline">\(S\)</span>.</p>
 <p>Now if we assume <span class="math inline">\(\beta\)</span> is sparse
@@ -147,11 +147,9 @@ maximize their power. This <em>requires</em> deviating from the standard
 linear regression, but since it’s preregistered we don’t have to worry
 about the increased number of researcher degrees of freedom involved,
 since those are all fixed independently of the data (since they are
-chosen before the researchers sees the data).<a href="#fn4"
-class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-<h2
-id="heterogeneous-treatment-effects---the-inconsistent-case">Heterogeneous
-treatment effects - the inconsistent case</h2>
+chosen before the researchers sees the data).<a href="#fn5"
+class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> ##
+Heterogeneous treatment effects - the inconsistent case</p>
 <p>Now lets break things. Let us add a set of new covariates <span
 class="math inline">\(Z_i\)</span> to our model and consider the case
 where the researcher is interested in the heterogenous treatment
@@ -212,8 +210,7 @@ handle this? Theoretically its very thorny, but maybe in practice its
 simple: researchers will explain why the PAP was wrong and argue the new
 specification is better, and reviewers will decide whether this is
 reasonable. Developing some theory to guide this process would be very
-useful though!</p>
-<h2 id="generalizing-these-results">Generalizing these results</h2>
+useful though! ## Generalizing these results</p>
 <p>I focused on the linear regression case above, but the cases above
 can be made fully general by considering misspecification with an always
 consistent estimator and a possibly inconsistent estimator. In the first
@@ -229,8 +226,7 @@ rejects the null. Maybe the researcher cannot tell either.</p>
 to explain a priori but becomes more clear a posteriori. This is a real
 issue with pre-analysis plans especially when researchers are restricted
 to “simple” designs, but it carries over to more complex procedures as
-well.</p>
-<h2 id="summarizing-these-ideas">Summarizing these ideas</h2>
+well. ## Summarizing these ideas</p>
 <p>The central takeaway here is that pre-analysis plans enable
 arbitrarily complex statistical procedures to be admissible strategies
 in the researcher-reviewer game. The obvious solution to the particular
@@ -266,33 +262,35 @@ arXiv:2208.09638</em></a> (2022).</p>
 role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>The miracle of science is that these two goals are not
+<li id="fn1"><p>This is not the only reason social scientists use OLS.
+In practice it is likely primarily inertia. But I think it does control
+degrees of freedom nonetheless and so this rationalization is
+reasonable.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is not the only reason social scientists use OLS.
+In practice it is likely primarily inertia. But I think it does control
+degrees of freedom nonetheless and so this rationalization is
+reasonable.<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The miracle of science is that these two goals are not
 that misaligned: journals and peer reviewers, universities, and grant
 making institutions conspire to ensure that “good” physics or chemistry
 or biology are rewarded. But those are the easy sciences, where signal
 tends to be high relative to noise and experiments tend to be easily
-repeatable regardless of context.<a href="#fnref1" class="footnote-back"
+repeatable regardless of context.<a href="#fnref3" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>At least for the specification search problem in linear
+<li id="fn4"><p>The miracle of science is that these two goals are not
+that misaligned: journals and peer reviewers, universities, and grant
+making institutions conspire to ensure that “good” physics or chemistry
+or biology are rewarded. But those are the easy sciences, where signal
+tends to be high relative to noise and experiments tend to be easily
+repeatable regardless of context.<a href="#fnref4" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>At least for the specification search problem in linear
 regression the chosen covariates have to appear in the regression
 equation! The transparency element is probably very important here, as
 if not more so than the degrees of freedom perspective since it allows
-peer review to function.<a href="#fnref2" class="footnote-back"
+peer review to function.<a href="#fnref5" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>At least for the specification search problem in linear
-regression the chosen covariates have to appear in the regression
-equation! The transparency element is probably very important here, as
-if not more so than the degrees of freedom perspective since it allows
-peer review to function.<a href="#fnref3" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Surprisingly some back of the envelope math and
-simulations imply this kind of specification search does not actually
-inflate the Type I error very much unless <span class="math inline">\(p
-&gt;&gt; n\)</span>. For <span class="math inline">\(n=500\)</span> and
-<span class="math inline">\(p=10,000\)</span> and setting the
-significance level <span class="math inline">\(\alpha=0.05\)</span> the
-actual probability of accepting the null is <span
-class="math inline">\(0.1\)</span>.<a href="#fnref4"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </aside>
