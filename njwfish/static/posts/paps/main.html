@@ -10,9 +10,14 @@ academic market, and as such their incentives are not to figure out
 whats true, but rather to get publishable results.<a href="#fn1"
 class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
 Pre-analysis plans are one way to align these goals, as Kasy and Spiess
-[1] argue.</p>
-<p>But PAPs are a relatively recent innovation though, so how did social
-scientists manage this problem before they were widespread?</p>
+[1] argue in a new paper. I think this is a nice paper! But this post is
+an argument that their model misses central elements of PAPs that
+restrict the usefulness of what they can say. You don’t have to have
+read their paper to read this post, it should stand on its own (but the
+paper is very readable!). Before diving in its worth stepping back and
+asking a question:</p>
+<p>PAPs are a relatively recent innovation, so how did social scientists
+manage this problem before they were widespread?</p>
 <p>One way was by forcing everyone to use linear regression. The
 simplicity of linear regression allows practitioners to have clear
 intuitions about what is reasonable in any given study. If we imagine
@@ -45,23 +50,24 @@ sophisticated econometric techniques without running into the problem of
 reviewer’s (often reasonable!) disbelief.</p>
 <p>The more common way of pitching PAPs is by saying they control
 p-hacking and specification search. I think this is not a particularly
-useful way to think about PAPs, since PAPs don’t generally solve these
-problems. A recent paper by Kasy and Spiess [1] provides a fully game
-theoretic formulation PAPs. Its a nice paper, but I think it has a core
-problem: the statistical model at the heart of their paper does not
-obviously fit actual practices PAPs are used for and this undermines
-their ability to speak to the above point.</p>
+useful way to think about PAPs, since PAPs only “solve” these problems
+in very specific situations, as I’ll demonstrate below.</p>
+<p>Now returning to Kasy and Spiess, they provide a fully game theoretic
+formulation PAPs. Its a nice paper, but the statistical model at the
+heart of their formulation seems to make it hard to see some of the
+central issues with PAPs.</p>
 <p>These issues become clear if we think about a simple model of
 specification search. We will consider an experiment where we are
 interested in estimating the ATE and we will see that the Kasy and
-Spiess results are plausible. Then we will change the estimand to a
-linear heterogeneous treatment effect and we will see that things fall
+Spiess results are plausible, even if its unclear whether it is actually
+compatible with their formulation. Then we will change the estimand to a
+linear heterogeneous treatment effect and everything will fall
 apart.</p>
-<p>The central point is that you only perform a specification search if
-there is not an a prori correct specification. So to understand PAPs you
-need to allow the possibility of mis-specification. Sometimes
-mis-specification is not a problem (as in the ATE case), and sometimes
-it is (as in the HETE case).</p>
+<p>My point is that you only perform a specification search if there is
+not an a prori correct specification. So to understand PAPs you need to
+allow the possibility of mis-specification. Sometimes mis-specification
+is not a problem (as in the ATE case), and sometimes it is (as in the
+HETE case).</p>
 <p>But this will bring us back to the benefit of PAPs I outline above:
 we can pre-specify more complex, more flexible research designs that can
 try to mitigate the possibility of misspecification. Now this does not
@@ -69,8 +75,7 @@ completely dissolve the issue: no matter how smart we are about our
 statistics/econometrics it is always possible the data confounds our
 priors and our pre-specified plan ends up seeming naive ex post. I think
 this is maybe the most interesting statistical question about PAPs: how
-do we think about ex post changes or adaptations? But I defer these
-questions to future work!</p>
+do we think about ex post changes or adaptations?</p>
 <p>Now on to the math!</p>
 <h2 id="a-simple-experiment---the-consistent-case">A simple experiment -
 the consistent case</h2>
