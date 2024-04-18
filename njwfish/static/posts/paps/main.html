@@ -75,65 +75,65 @@ questions to future work!</p>
 <h2 id="a-simple-experiment---the-consistent-case">A simple experiment -
 the consistent case</h2>
 <p>A researcher has a population of individuals with <span
-class="math inline">\(p\)</span>-dimensional covariates vectors <span
-class="math inline">\(X_i\)</span>. They run an experiment, randomly
-assigning treatments <span class="math inline">\(T_i \sim
-\text{Bern}(\frac12)\)</span> to the population. After the experiment
-they observe an outcome <span class="math inline">\(Y_i\)</span>.</p>
+class="math inline">p</span>-dimensional covariates vectors <span
+class="math inline">X_i</span>. They run an experiment, randomly
+assigning treatments <span class="math inline">T_i \sim
+\text{Bern}(\frac12)</span> to the population. After the experiment
+they observe an outcome <span class="math inline">Y_i</span>.</p>
 <p>We can assume a simple linear model for the outcome:</p>
-<p><span class="math display">\[Y_i = \tau T_i + \beta X_i +
-\epsilon_i\]</span></p>
-<p>Where <span class="math inline">\(\epsilon_i\)</span> is some iid
+<p><span class="math display">Y_i = \tau T_i + \beta X_i +
+\epsilon_i</span></p>
+<p>Where <span class="math inline">\epsilon_i</span> is some iid
 noise. The researcher wants to maximize their probability of rejecting
-the null <span class="math inline">\(H_0: \tau = 0\)</span> in favor of
-the alternative <span class="math inline">\(H_1: \tau \neq
-0\)</span>.</p>
+the null <span class="math inline">H_0: \tau = 0</span> in favor of
+the alternative <span class="math inline">H_1: \tau \neq
+0</span>.</p>
 <p>We will assume throughout that researchers are restricted to running
 ordinary least squares to estimate their effects. This will illustrate
 the dynamics of misspecification I discuss above, and we will generalize
 all these intuitions below.</p>
 <p>Since the researcher randomized <span
-class="math inline">\(T_i\)</span> they can just consider the truncated
+class="math inline">T_i</span> they can just consider the truncated
 regression:</p>
-<p><span class="math display">\[ Y_i = \tau T_i +
-\epsilon&#39;_i\]</span></p>
+<p><span class="math display"> Y_i = \tau T_i +
+\epsilon&#39;_i</span></p>
 <p>And this is a consistent estimator (since <span
-class="math inline">\(T_i \perp X_i, Y(0), Y(1)\)</span>). But this will
+class="math inline">T_i \perp X_i, Y(0), Y(1)</span>). But this will
 not maximize the chance they reject the null.</p>
 <p>If the researcher does not pre-register their analysis they might
 search over all possible linear regressions, running the regression
-<span class="math inline">\(Y_i = \tau T_i + \beta_S S_{i}
-\epsilon&#39;_i\)</span> for every subset <span
-class="math inline">\(S_i\)</span> of <span
-class="math inline">\(X_i\)</span>, picking the subset of covariates to
+<span class="math inline">Y_i = \tau T_i + \beta_S S_{i}
+\epsilon&#39;_i</span> for every subset <span
+class="math inline">S_i</span> of <span
+class="math inline">X_i</span>, picking the subset of covariates to
 include that results in the smallest p-value for <span
-class="math inline">\(\hat \tau\)</span>. This will invalidate the
+class="math inline">\hat \tau</span>. This will invalidate the
 hypothesis test,<a href="#fn3" class="footnote-ref" id="fnref3"
 role="doc-noteref"><sup>3</sup></a> so instead we can force the
 researcher to pre-register the subset of covariates they will include in
-the regression <span class="math inline">\(S\)</span>.</p>
-<p>Now if we assume <span class="math inline">\(\beta\)</span> is sparse
+the regression <span class="math inline">S</span>.</p>
+<p>Now if we assume <span class="math inline">\beta</span> is sparse
 the researcher’s problem is a little tricky. To maximize their power
 they want to include only the non-zero components of <span
-class="math inline">\(\beta\)</span>, but they don’t know which
+class="math inline">\beta</span>, but they don’t know which
 components those will be.</p>
 <p>It is worth noting that the researcher can pre-specify any subset of
 covariates and have a <em>consistent</em> estimator for <span
-class="math inline">\(\tau\)</span>, the only thing thats tricky is
+class="math inline">\tau</span>, the only thing thats tricky is
 maximizing their power. So if we assume the researcher has some prior
-over which subests of <span class="math inline">\(X_i\)</span> are
+over which subests of <span class="math inline">X_i</span> are
 likely to be non-zero, its straightforward to see that they will
 pre-register their best-guess.</p>
 <p>I do not think this model is quite covered by the Kasy and Spiess
 paper, which is a bit sad, but its very obviously in the spirit of the
 results they derive.</p>
 <p>Now there is a very obvious issue here: if we assume <span
-class="math inline">\(\beta\)</span> is sparse and the researcher only
-cares about <span class="math inline">\(\tau\)</span> they should simply
-pre-register an L1 penalty on <span class="math inline">\(\beta\)</span>
+class="math inline">\beta</span> is sparse and the researcher only
+cares about <span class="math inline">\tau</span> they should simply
+pre-register an L1 penalty on <span class="math inline">\beta</span>
 in their linear regression. Then using standard semi-parametric results
 they can build confidence intervals for <span
-class="math inline">\(\tau\)</span> and they should be able to directly
+class="math inline">\tau</span> and they should be able to directly
 maximize their power. This <em>requires</em> deviating from the standard
 linear regression, but since it’s preregistered we don’t have to worry
 about the increased number of researcher degrees of freedom involved,
@@ -144,16 +144,16 @@ class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 id="heterogeneous-treatment-effects---the-inconsistent-case">Heterogeneous
 treatment effects - the inconsistent case</h2>
 <p>Now lets break things. Let us add a set of new covariates <span
-class="math inline">\(Z_i\)</span> to our model and consider the case
+class="math inline">Z_i</span> to our model and consider the case
 where the researcher is interested in the heterogenous treatment
 effect:</p>
-<p><span class="math display">\[Y_i = \tau T_i + \beta X_i + \zeta Z_i +
-\gamma T_i Z_i + \epsilon_i  \]</span></p>
+<p><span class="math display">Y_i = \tau T_i + \beta X_i + \zeta Z_i +
+\gamma T_i Z_i + \epsilon_i  </span></p>
 <p>Where the researcher wants to test the null <span
-class="math inline">\(H_0: \gamma = 0\)</span> against <span
-class="math inline">\(H_1: \gamma \neq 0\)</span>. But we have not
-imposed restrictions on <span class="math inline">\(\text{Cov}(X_i,
-Z_i)\)</span>, so in general these covariates can have arbitrary
+class="math inline">H_0: \gamma = 0</span> against <span
+class="math inline">H_1: \gamma \neq 0</span>. But we have not
+imposed restrictions on <span class="math inline">\text{Cov}(X_i,
+Z_i)</span>, so in general these covariates can have arbitrary
 dependence.</p>
 <p>Here our restriction to ordinary least squares creates a serious
 problem.</p>
@@ -170,26 +170,26 @@ researcher is performing valid statistical tests (I think this is the
 core intuition [1] is trying to formalize).</p>
 <p>In this case the mis-specification is a problem for the reviewer too,
 since if the researcher fails to include a covariate <span
-class="math inline">\(X_j\)</span> which has a non-zero coefficient
-<span class="math inline">\(\beta_{j}\)</span> then the researcher’s
-test for <span class="math inline">\(\gamma = 0\)</span> will be
+class="math inline">X_j</span> which has a non-zero coefficient
+<span class="math inline">\beta_{j}</span> then the researcher’s
+test for <span class="math inline">\gamma = 0</span> will be
 invalid.</p>
 <p>This seems like the real objection to pre-analysis plans: that what
 the researcher preregistered was their “best guess” at what the right
 specification was, but they might be wrong! They might look at the
-estimated <span class="math inline">\(\gamma\)</span> and think that it
+estimated <span class="math inline">\gamma</span> and think that it
 is very surprising, e.g. it is insignificant with the wrong sign, which
 might prompt them to look at the data again only to realize this
 surprisingness is because they left out an important covariate in their
 pre-analysis plan which, when included, brings the estimated <span
-class="math inline">\(\gamma\)</span> in line with their prior.</p>
+class="math inline">\gamma</span> in line with their prior.</p>
 <p>The problem is that to the reviewer this is observationally
 equivalent to the case where the researcher just tried every possible
 regression until they got a significant result.</p>
 <p>So what should we do here? Well again the obvious answer, under the
 particular model in this case, is to once more use an L1 penalty and
 include all covariates, using semi-parametrics to ensure a valid
-unbiased estimator for <span class="math inline">\(\gamma\)</span>. And
+unbiased estimator for <span class="math inline">\gamma</span>. And
 that’s the point! Double-debiased machine learning has a lot of dials we
 might worry about researchers tweaking in observational settings, but
 PAPs completely ameliorate these issues because PAPs force these degrees
@@ -244,7 +244,7 @@ experiments+PAPs really exciting for econometricians and statisticians!
 Unfortunately even if a researcher could specify the correct model
 deriving “the right test” is often hard. The semiparametrics necessary
 to ensure a consistent estimator with correct confidence intervals for
-<span class="math inline">\(\gamma\)</span> in the second case is not
+<span class="math inline">\gamma</span> in the second case is not
 trivial! And this remains a very stylized linear model! This “problem”
 is great for econometricians and statisticians who have specialized in
 nailing the estimator, given the model. Opportunities for important
@@ -273,12 +273,12 @@ allows peer review to function.<a href="#fnref3" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Surprisingly some back of the envelope math and
 simulations imply this kind of specification search does not actually
-inflate the Type I error very much unless <span class="math inline">\(p
-&gt;&gt; n\)</span>. For <span class="math inline">\(n=500\)</span> and
-<span class="math inline">\(p=10,000\)</span> and setting the
-significance level <span class="math inline">\(\alpha=0.05\)</span> the
+inflate the Type I error very much unless <span class="math inline">p
+&gt;&gt; n</span>. For <span class="math inline">n=500</span> and
+<span class="math inline">p=10,000</span> and setting the
+significance level <span class="math inline">\alpha=0.05</span> the
 actual probability of accepting the null is <span
-class="math inline">\(0.1\)</span>.<a href="#fnref4"
+class="math inline">0.1</span>.<a href="#fnref4"
 class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </aside>
