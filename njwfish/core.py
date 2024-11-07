@@ -62,7 +62,6 @@ def posts():
         for folder in os.walk(posts_dir):
             if folder[0].split('/')[-1] == "posts" or folder[0].split('/')[-1] == "static":
                 continue
-            files = folder[2]
 
             dir_info = os.path.join(*folder[0].split('/')[-3:]) + '/'
 
@@ -72,7 +71,8 @@ def posts():
                 (
                     url_for('.post', post=folder[0].split('/')[-1]),
                     title, blurb,
-                    time.strftime('%m/%d/%Y', time.gmtime(os.path.getmtime(dir_info)))
+                    time.strftime('%m/%d/%Y', time.gmtime(os.path.getmtime(dir_info))),
+                    time.gmtime(os.path.getmtime(dir_info))
                 )
             )
         posts = sorted(posts, key=lambda x: x[-1], reverse=False)

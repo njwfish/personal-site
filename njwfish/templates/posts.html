@@ -17,7 +17,7 @@ th, td {
 </style>
 
 <table>
-{% for url, title, blurb, time in posts %}
+{% for url, title, blurb, time, _ in posts %}
 <tr>
     <td><h5><a href={{ url }}>{{ title | safe}}</a></h5> {{ blurb | safe}}</td>
     <td style="text-align: right"> {{ time }} </td>
