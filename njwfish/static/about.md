@@ -2,7 +2,7 @@
 
 My name is Nic Fishman, I'm currently a PhD student in Statistics at Harvard University.
 
-I build reliable large-scale machine learning systems for science, focusing on applications in biology, healthcare, and social science.
+I work on ML for science, specifically building reliable large-scale machine learning systems for biology, healthcare, and social science.
 
 Currently I am working on three major applied projects:
 
