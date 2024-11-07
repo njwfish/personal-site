@@ -52,7 +52,6 @@
     ('/resume', 'resume', 'resume'),
     ] -%}
     <nav class="navbar" role="navigation">
-
         <div class="containernav">
             <ul class="navbar-list">
                 {% for href, id, caption in navigation_bar %}
@@ -63,7 +62,6 @@
                         {% else %}
                         <p style="display: inline;">{{ caption[:3] }}</p><p style="color: #333333; display: inline;">{{ caption[3:] }}</p>
                         {% endif %}
-
                     </a>
                 </li>
                 {% endfor %}

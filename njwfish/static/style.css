@@ -147,14 +147,14 @@ h5 {
 }
 .container {
   width: 900px;
-  max-width: 85%;
+  max-width: 90%;
   overflow: auto;
   padding-bottom: 40px;
 }
 
 .containernav {
   width: 900px;
-  max-width: 85%;
+  max-width: 90%;
 }
 
 .header {
@@ -274,7 +274,7 @@ h5 {
   /* Re-overiding the width 100% declaration to match size of % based container */
   .has-docked-nav .navbar > .containernav {
       width: 900px;
-  max-width: 85%;
+  max-width: 90%;
   margin: auto; }
 
   /* Popover */
@@ -393,7 +393,7 @@ h5 {
   /* Re-overiding the width 100% declaration to match size of % based container */
   .has-docked-nav .navbar > .containernav {
       width: 900px;
-  max-width: 85%;
+  max-width: 90%;
   margin: auto; }
 
   /* Popover */
