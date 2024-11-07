@@ -52,7 +52,7 @@ def papers():
         abort(404)
 
 
-@core.route('/words')
+@core.route('/posts')
 def posts():
     try:
         posts = []
@@ -84,7 +84,7 @@ def md_to_html(md):
     text = input_file.read()
     return markdown.markdown(text)
 
-@core.route('/words/<post>')
+@core.route('/posts/<post>')
 def post(post):
     try:
         folder = [os.path.dirname(__file__), 'static', 'posts', post]
