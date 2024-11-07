@@ -75,7 +75,7 @@ def posts():
                     time.gmtime(os.path.getmtime(dir_info))
                 )
             )
-        posts = sorted(posts, key=lambda x: x[-1], reverse=False)
+        posts = sorted(posts, key=lambda x: x[-1], reverse=True)
         return render_template('posts.html', posts=posts)
     except TemplateNotFound:
         abort(404)
