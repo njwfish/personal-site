@@ -1,8 +1,8 @@
 ##### About
 
-My name is Nic Fishman, I'm currently a PhD student in Statistics at Harvard University.
+My name is Nic Fishman, I am a PhD student in Statistics at Harvard University.
 
-I build reliable large-scale machine learning systems for science, focusing on biology, healthcare, and social science.
+I build large-scale machine learning systems for science at the intersection of generative AI and causal inference, focusing on biology, healthcare, and social science.
 
 Currently I am working on three major applied projects:
 
@@ -12,6 +12,6 @@ Currently I am working on three major applied projects:
 
 3. Non-convex optimization for estimating vote choice in elections, with applications in causal inference.
 
-In addition to application-driven work, I also focus on machine learning and causal inference methodology, critiquing existing approaches and developing new methods for practitioners.
+In addition to application-driven work, I also consider questions about methodology and meta-science, trying to understand how to best use statistics, causal inference, and machine learning to answer scientific questions.
 
 You can find a more complete CV [here](resume), and you can reach me at njwfish [at] gmail.com.
