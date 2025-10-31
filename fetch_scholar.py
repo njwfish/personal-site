@@ -352,6 +352,13 @@ def organize_papers(papers: List[Dict]) -> Dict:
     published = []
     working = []
     
+    # Publication venue indicators
+    publication_indicators = [
+        'science', 'nature', 'neurips', 'proceedings', 'journal', 'conference',
+        'transactions', 'icml', 'acl', 'opt', 'acm', 'fairness', 'accountability',
+        'ijcai', 'aaai', 'iclr', 'jmlr', 'pami', 'cvpr', 'eccv', 'iccv'
+    ]
+    
     for paper in papers:
         venue = paper.get('venue', '').strip()
         citation = paper.get('citation', '').strip()
@@ -367,20 +374,26 @@ def organize_papers(papers: List[Dict]) -> Dict:
             paper['authors'] = format_author_list(authors, bold_name="Nic Fishman")
         
         venue_lower = venue.lower() if venue else ''
+        citation_lower = citation.lower() if citation else ''
+        
+        # Check if arXiv-only (working paper)
+        if venue_lower and 'arxiv' in venue_lower:
+            # Check if there's also a publication venue indicator
+            has_publication = any(ind in venue_lower or ind in citation_lower for ind in publication_indicators)
+            if not has_publication:
+                working.append(paper)
+                continue
         
         # Check for working paper indicators
-        if not venue_lower:
-            # No venue = working paper
+        if 'in preparation' in venue_lower or 'in prep' in venue_lower:
             working.append(paper)
-        elif 'in preparation' in venue_lower or 'in prep' in venue_lower:
-            # Explicitly marked as working
-            working.append(paper)
-        elif 'arxiv' in venue_lower:
-            # arXiv-only = working paper
-            working.append(paper)
-        else:
-            # Has venue = published
+            continue
+        
+        # Check if venue looks like a publication venue
+        if any(indicator in venue_lower or indicator in citation_lower for indicator in publication_indicators):
             published.append(paper)
+        else:
+            working.append(paper)
     
     # Sort by year (newest first)
     published.sort(key=lambda p: (p.get('year', '') or '0'), reverse=True)
