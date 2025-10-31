@@ -11,7 +11,6 @@ import time
 import shutil
 import subprocess
 from pathlib import Path
-from datetime import datetime
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 # Configuration
@@ -47,19 +46,6 @@ def load_post(post_dir):
     title = title_file.read_text().strip() if title_file.exists() else post_name.replace('_', ' ').title()
     blurb = blurb_file.read_text().strip() if blurb_file.exists() else ""
     
-    # Ensure blurb exists - if missing, create a default
-    if not blurb:
-        blurb = "No description available."
-        # Try to extract from markdown if possible
-        if main_md.exists():
-            lines = main_md.read_text().split('\n')
-            for line in lines[:3]:  # Check first 3 lines
-                if line.strip() and not line.strip().startswith('#'):
-                    blurb = line.strip()[:150] + "..." if len(line.strip()) > 150 else line.strip()
-                    break
-        # Write blurb back to file
-        blurb_file.write_text(blurb)
-    
     # Read main content
     main_html = post_dir / 'main.html'
     main_md = post_dir / 'main.md'
@@ -75,8 +61,22 @@ def load_post(post_dir):
                 if line.strip().startswith('# '):
                     title = line.strip()[2:].strip()
                     break
+        # Ensure blurb exists - if missing, create a default from markdown
+        if not blurb:
+            lines = main_md.read_text().split('\n')
+            for line in lines[:3]:  # Check first 3 lines
+                if line.strip() and not line.strip().startswith('#'):
+                    blurb = line.strip()[:150] + "..." if len(line.strip()) > 150 else line.strip()
+                    break
+            if not blurb:
+                blurb = "No description available."
+            # Write blurb back to file
+            blurb_file.write_text(blurb)
     else:
         post_content = ""
+        if not blurb:
+            blurb = "No description available."
+            blurb_file.write_text(blurb)
     
     # Get modification time
     mtime = os.path.getmtime(post_dir)
@@ -138,6 +138,11 @@ def copy_static_files():
             ensure_dir(static_output)
             shutil.copy2(src, static_output / pdf)
     
+    # Copy favicon to root for better browser compatibility
+    favicon_src = STATIC_DIR / 'img' / 'favicon.ico'
+    if favicon_src.exists():
+        shutil.copy2(favicon_src, OUTPUT_DIR / 'favicon.ico')
+    
     # Copy post assets (PDFs, images, etc. from post directories)
     posts_static = OUTPUT_DIR / 'static' / 'posts'
     ensure_dir(posts_static)
@@ -177,7 +182,7 @@ def build_cv():
     if cv_tex.exists():
         try:
             # Change to latex_cv directory for compilation
-            result = subprocess.run(
+            subprocess.run(
                 ['xelatex', '-interaction=nonstopmode', 'cv.tex'],
                 cwd=str(cv_dir),
                 capture_output=True,
@@ -318,7 +323,7 @@ def build_site():
                 for paper in papers_data:
                     venue = paper.get('venue', '').lower()
                     year = paper.get('year', '')
-                    if venue and venue.strip() and not 'in preparation' in venue.lower():
+                    if venue and venue.strip() and 'in preparation' not in venue.lower():
                         if any(journal in venue.lower() for journal in ['science', 'nature', 'advances in neural', 'neurips', 'proceedings', 'journal', 'conference', 'arxiv', 'transactions', 'icml', 'opt']):
                             published_papers.append(paper)
                         elif year and year.isdigit() and int(year) >= 2018:
@@ -361,6 +366,141 @@ def build_site():
     print(f"Total posts: {len(posts)}")
     print(f"Total talks: {len(talks)}")
 
+def deploy_to_gh_pages():
+    """Deploy built site to gh-pages branch"""
+    print("\n" + "="*60)
+    print("Deploying to gh-pages branch...")
+    print("="*60)
+    
+    # Check if we're in a git repository
+    try:
+        subprocess.run(['git', 'rev-parse', '--git-dir'], 
+                      stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+    except subprocess.CalledProcessError:
+        print("Warning: Not in a git repository. Skipping deployment.")
+        return
+    
+    # Get current branch
+    result = subprocess.run(['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                          capture_output=True, text=True, check=True)
+    current_branch = result.stdout.strip()
+    
+    # Verify site was built before deploying
+    if not OUTPUT_DIR.exists():
+        print(f"Error: {OUTPUT_DIR} directory does not exist!")
+        print("Please run build_site() first. Build automatically runs before deploy.")
+        return
+    
+    index_file = OUTPUT_DIR / 'index.html'
+    if not index_file.exists():
+        print(f"Error: {index_file} does not exist!")
+        print("Site build may have failed. Please check build output.")
+        return
+    
+    # Get absolute path to site directory (before switching branches)
+    site_path = OUTPUT_DIR.resolve()
+    print(f"✓ Found built site at {site_path}")
+    
+    # Stash any uncommitted changes
+    subprocess.run(['git', 'stash'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+    try:
+        # Check if gh-pages branch exists
+        result = subprocess.run(['git', 'show-ref', '--verify', '--quiet', 'refs/heads/gh-pages'],
+                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if result.returncode != 0:
+            # Create orphan branch if it doesn't exist
+            print("Creating gh-pages branch...")
+            subprocess.run(['git', 'checkout', '--orphan', 'gh-pages'], check=True)
+        else:
+            # Switch to gh-pages branch
+            print("Switching to gh-pages branch...")
+            subprocess.run(['git', 'checkout', 'gh-pages'], check=True)
+        
+        # Remove only tracked files (not untracked like site/)
+        print("Cleaning gh-pages branch...")
+        result = subprocess.run(['git', 'ls-files'], capture_output=True, text=True)
+        if result.stdout.strip():
+            subprocess.run(['git', 'rm', '-rf', '--quiet', '.'], 
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        # Copy built site files (using absolute path from master branch)
+        # Copy contents of site_path to current directory root
+        print("Copying built site files...")
+        files_copied = 0
+        for item in site_path.iterdir():
+            if item.name != '.git':
+                dest = Path(item.name)
+                if item.is_dir():
+                    if dest.exists():
+                        shutil.rmtree(dest)
+                    shutil.copytree(item, dest)
+                    files_copied += 1
+                else:
+                    shutil.copy2(item, dest)
+                    files_copied += 1
+        
+        if files_copied == 0:
+            print("Warning: No files to copy. Site may not have been built correctly.")
+            return
+        
+        # Verify index.html was copied
+        if not Path('index.html').exists():
+            print("Error: index.html was not copied! Deployment aborted.")
+            return
+        
+        print(f"✓ Copied {files_copied} files/directories")
+        
+        # Add all files
+        subprocess.run(['git', 'add', '-A'], check=True)
+        
+        # Check if there are changes to commit
+        result = subprocess.run(['git', 'status', '--porcelain'],
+                              capture_output=True, text=True)
+        if result.stdout.strip():
+            # Commit changes
+            print("Committing changes...")
+            subprocess.run(['git', 'commit', '-m', 'Update site'],
+                         check=True)
+            
+            # Push to remote
+            print("Pushing to origin/gh-pages...")
+            # Check if upstream exists
+            result = subprocess.run(['git', 'rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{u}'],
+                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            push_cmd = ['git', '-c', 'http.version=HTTP/1.1', 
+                       '-c', 'http.postBuffer=524288000',
+                       'push']
+            if result.returncode != 0:
+                # First push, set upstream
+                push_cmd.extend(['-u', 'origin', 'gh-pages'])
+            else:
+                push_cmd.extend(['origin', 'gh-pages'])
+            subprocess.run(push_cmd, check=True)
+            print("✓ Successfully deployed to gh-pages!")
+        else:
+            print("No changes to deploy.")
+        
+    except subprocess.CalledProcessError as e:
+        print(f"Error during deployment: {e}")
+        print("Switching back to original branch...")
+    finally:
+        # Switch back to original branch
+        print(f"Switching back to {current_branch} branch...")
+        subprocess.run(['git', 'checkout', current_branch], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        # Restore stashed changes if any
+        subprocess.run(['git', 'stash', 'pop'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+
 if __name__ == '__main__':
+    import sys
+    
     build_site()
+    
+    # Deploy to gh-pages if requested
+    if '--deploy' in sys.argv or '-d' in sys.argv:
+        deploy_to_gh_pages()
+    else:
+        print("\nTip: Run with --deploy to automatically deploy to gh-pages")
 

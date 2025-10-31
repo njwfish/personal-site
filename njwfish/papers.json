@@ -25,18 +25,6 @@
       "auto_fetched": true
     },
     {
-      "title": "The fragility of fairness: Causal sensitivity analysis for fair machine learning",
-      "authors": "Jake Fawkes, <b>Nic Fishman</b>, Mel Andrews, and Zachary Lipton",
-      "venue": "Advances in Neural Information Processing Systems",
-      "year": "2024",
-      "citation": "Advances in Neural Information Processing Systems 37, 137105-137134, 2024",
-      "pdf_link": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/f7be3ebca4980b59fe3f665011115395-Abstract-Datasets_and_Benchmarks_Track.html",
-      "pub_url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/f7be3ebca4980b59fe3f665011115395-Abstract-Datasets_and_Benchmarks_Track.html",
-      "eprint_url": "",
-      "source": "google_scholar",
-      "auto_fetched": true
-    },
-    {
       "title": "Human mobility networks reveal increased segregation in large cities",
       "authors": "Hamed Nilforoshan, Wenli Looi, Emma Pierson, Blanca Villanueva, <b>Nic Fishman</b>, Yiling Chen, John Sholar, Beth Redbird, David Grusky, and Jure Leskovec",
       "venue": "Nature",
@@ -56,18 +44,6 @@
       "citation": "Transactions on Machine Learning Research, 2023",
       "pdf_link": "https://arxiv.org/abs/2304.05364",
       "pub_url": "https://arxiv.org/abs/2304.05364",
-      "eprint_url": "",
-      "source": "google_scholar",
-      "auto_fetched": true
-    },
-    {
-      "title": "Metropolis sampling for constrained diffusion models",
-      "authors": "<b>Nic Fishman</b>, Leo Klarner, Emile Mathieu, Michael Hutchinson, and Valentin De Bortoli",
-      "venue": "Advances in Neural Information Processing Systems",
-      "year": "2023",
-      "citation": "Advances in Neural Information Processing Systems 36, 62296-62331, 2023",
-      "pdf_link": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/c47bfcc8e2eccdc540fad1e25f13aa4d-Abstract-Conference.html",
-      "pub_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/c47bfcc8e2eccdc540fad1e25f13aa4d-Abstract-Conference.html",
       "eprint_url": "",
       "source": "google_scholar",
       "auto_fetched": true
@@ -97,18 +73,6 @@
       "auto_fetched": true
     },
     {
-      "title": "Making (Global) Criminal Procedure: Empire, the End of Justice, and the Rise of Efficiency",
-      "authors": "<b>Nic Fishman</b>",
-      "venue": "Stanford University",
-      "year": "2021",
-      "citation": "Stanford University, 2021",
-      "pdf_link": null,
-      "pub_url": "",
-      "eprint_url": "",
-      "source": "google_scholar",
-      "auto_fetched": true
-    },
-    {
       "title": "Fleeing from Terror: Considering Safety When Designing Public Spaces in the Age of Mass Murder",
       "authors": "<b>Nic Fishman</b>",
       "venue": "Pathways: Stanford Journal of Public Health (SJPH)",
@@ -127,30 +91,6 @@
       "pdf_link": "https://icml-compbio.github.io/icml-website-2020/2020/papers/WCBICML2020_paper_46.pdf",
       "source": "manual",
       "auto_fetched": false
-    },
-    {
-      "title": "kundajelab/simdna: simulated datasets of DNA, June 2019",
-      "authors": "Avant Shrikumar and <b>Nic Fishman</b> and Anshul Kundaje",
-      "venue": "URL https://doi. org/10.5281/zenodo",
-      "year": "",
-      "citation": "URL https://doi. org/10.5281/zenodo 3258813, 0",
-      "pdf_link": null,
-      "pub_url": "",
-      "eprint_url": "",
-      "source": "google_scholar",
-      "auto_fetched": true
-    },
-    {
-      "title": "Understanding Transcriptional Regulatory Logic Using Convolutional and Generative Deep Learning Models",
-      "authors": "<b>Nic Fishman</b> and Georgi K Marinov and Anshul Kundaje",
-      "venue": "<b>Nic Fishman</b> and Georgi K Marinov and Anshul Kundaje, \"Understanding Transcriptional Regulatory Logic Using Convolutional and Generative Deep Learning Models\"",
-      "year": "",
-      "citation": "<b>Nic Fishman</b> and Georgi K Marinov and Anshul Kundaje, \"Understanding Transcriptional Regulatory Logic Using Convolutional and Generative Deep Learning Models\"",
-      "pdf_link": "https://cs229.stanford.edu/proj2018/report/400.pdf",
-      "pub_url": "https://cs229.stanford.edu/proj2018/report/400.pdf",
-      "eprint_url": "",
-      "source": "google_scholar",
-      "auto_fetched": true
     }
   ],
   "working": [
@@ -162,6 +102,42 @@
       "citation": "arXiv preprint arXiv:2505.18150, 2025",
       "pdf_link": "https://arxiv.org/abs/2505.18150",
       "pub_url": "https://arxiv.org/abs/2505.18150",
+      "eprint_url": "",
+      "source": "google_scholar",
+      "auto_fetched": true
+    },
+    {
+      "title": "The fragility of fairness: Causal sensitivity analysis for fair machine learning",
+      "authors": "Jake Fawkes, <b>Nic Fishman</b>, Mel Andrews, and Zachary Lipton",
+      "venue": "Advances in Neural Information Processing Systems",
+      "year": "2024",
+      "citation": "Advances in Neural Information Processing Systems 37, 137105-137134, 2024",
+      "pdf_link": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/f7be3ebca4980b59fe3f665011115395-Abstract-Datasets_and_Benchmarks_Track.html",
+      "pub_url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/f7be3ebca4980b59fe3f665011115395-Abstract-Datasets_and_Benchmarks_Track.html",
+      "eprint_url": "",
+      "source": "google_scholar",
+      "auto_fetched": true
+    },
+    {
+      "title": "Metropolis sampling for constrained diffusion models",
+      "authors": "<b>Nic Fishman</b>, Leo Klarner, Emile Mathieu, Michael Hutchinson, and Valentin De Bortoli",
+      "venue": "Advances in Neural Information Processing Systems",
+      "year": "2023",
+      "citation": "Advances in Neural Information Processing Systems 36, 62296-62331, 2023",
+      "pdf_link": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/c47bfcc8e2eccdc540fad1e25f13aa4d-Abstract-Conference.html",
+      "pub_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/c47bfcc8e2eccdc540fad1e25f13aa4d-Abstract-Conference.html",
+      "eprint_url": "",
+      "source": "google_scholar",
+      "auto_fetched": true
+    },
+    {
+      "title": "Making (Global) Criminal Procedure: Empire, the End of Justice, and the Rise of Efficiency",
+      "authors": "<b>Nic Fishman</b>",
+      "venue": "Stanford University",
+      "year": "2021",
+      "citation": "Stanford University, 2021",
+      "pdf_link": null,
+      "pub_url": "",
       "eprint_url": "",
       "source": "google_scholar",
       "auto_fetched": true
@@ -189,6 +165,30 @@
       "pdf_link": null,
       "source": "manual",
       "auto_fetched": false
+    },
+    {
+      "title": "kundajelab/simdna: simulated datasets of DNA, June 2019",
+      "authors": "Avant Shrikumar and <b>Nic Fishman</b> and Anshul Kundaje",
+      "venue": "URL https://doi. org/10.5281/zenodo",
+      "year": "",
+      "citation": "URL https://doi. org/10.5281/zenodo 3258813, 0",
+      "pdf_link": null,
+      "pub_url": "",
+      "eprint_url": "",
+      "source": "google_scholar",
+      "auto_fetched": true
+    },
+    {
+      "title": "Understanding Transcriptional Regulatory Logic Using Convolutional and Generative Deep Learning Models",
+      "authors": "<b>Nic Fishman</b> and Georgi K Marinov and Anshul Kundaje",
+      "venue": "<b>Nic Fishman</b> and Georgi K Marinov and Anshul Kundaje, \"Understanding Transcriptional Regulatory Logic Using Convolutional and Generative Deep Learning Models\"",
+      "year": "",
+      "citation": "<b>Nic Fishman</b> and Georgi K Marinov and Anshul Kundaje, \"Understanding Transcriptional Regulatory Logic Using Convolutional and Generative Deep Learning Models\"",
+      "pdf_link": "https://cs229.stanford.edu/proj2018/report/400.pdf",
+      "pub_url": "https://cs229.stanford.edu/proj2018/report/400.pdf",
+      "eprint_url": "",
+      "source": "google_scholar",
+      "auto_fetched": true
     }
   ]
 }
