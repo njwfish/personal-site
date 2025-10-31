@@ -1,2 +1,9 @@
-njwfish/venv/*
-njwfish/venv/*/*
+# Python static site generator
+site/
+*.pyc
+__pycache__/
+.DS_Store
+*.log
+
+# Conda
+condaenv.*.requirements.txt

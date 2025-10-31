@@ -1,8 +1,23 @@
 {% extends "base.html" %}
-{% set active_page = "" %}
+{% set active_page = "words" %}
 
 {% block content %}
-
-    {{ post | safe}}
-
+<article class="post-content">
+    <header class="post-header">
+        <h1 class="post-title">{{ post.title }}</h1>
+        {% if post.date %}
+        <time class="post-date" datetime="{{ post.date_sort }}">{{ post.date }}</time>
+        {% endif %}
+    </header>
+    
+    <div class="post-body">
+        {{ post.content|safe }}
+    </div>
+    
+    <footer class="post-footer">
+        <nav class="post-nav">
+            <a href="/posts/" class="back-link">← Back to posts</a>
+        </nav>
+    </footer>
+</article>
 {% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% set active_page = "talks" %}
+
+{% block content %}
+<article class="page-content">
+    {% if talks %}
+    <section class="papers-section">
+        <ol class="papers-list">
+            {% for talk in talks %}
+            <li class="paper-entry">
+                <div class="paper-content">
+                    <div class="paper-title-row">
+                        {% if talk.get('slides') %}
+                        <a href="{{ talk.get('slides') }}" target="_blank" rel="noopener noreferrer" class="paper-title-link">
+                            {{ talk.get('title', 'Untitled Talk') }}
+                        </a>
+                        {% else %}
+                        <span class="paper-title-text">{{ talk.get('title', 'Untitled Talk') }}</span>
+                        {% endif %}
+                        {% if talk.get('video') or talk.get('links') %}
+                        <span class="paper-links-inline">
+                            {% if talk.get('video') %}
+                            <a href="{{ talk.get('video') }}" target="_blank" rel="noopener noreferrer" class="paper-link-inline">Video</a>
+                            {% endif %}
+                            {% if talk.get('links') %}
+                            {% for link in talk.get('links', []) %}
+                            <a href="{{ link.get('url') }}" target="_blank" rel="noopener noreferrer" class="paper-link-inline">{{ link.get('name', 'Link') }}</a>
+                            {% endfor %}
+                            {% endif %}
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    {% if talk.get('venue') %}
+                    <div class="paper-venue">
+                        {% if talk.get('location') %}
+                        <em>{{ talk.get('venue') }}</em>, {{ talk.get('location') }}{% if talk.get('date') %}, {{ talk.get('date') }}{% endif %}
+                        {% else %}
+                        <em>{{ talk.get('venue') }}</em>{% if talk.get('date') %}, {{ talk.get('date') }}{% endif %}
+                        {% endif %}
+                    </div>
+                    {% elif talk.get('location') %}
+                    <div class="paper-venue">{{ talk.get('location') }}{% if talk.get('date') %}, {{ talk.get('date') }}{% endif %}</div>
+                    {% elif talk.get('date') %}
+                    <div class="paper-venue"><em>{{ talk.get('date') }}</em></div>
+                    {% endif %}
+                    
+                    {% if talk.get('description') %}
+                    <div class="paper-authors">{{ talk.get('description') }}</div>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
+    </section>
+    {% else %}
+    <p class="no-talks">No talks yet. Check back soon!</p>
+    {% endif %}
+</article>
+{% endblock %}

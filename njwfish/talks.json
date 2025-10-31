@@ -1,0 +1,72 @@
+[
+    {
+        "title": "Generative modeling on the space of empirical measures",
+        "venue": "Boston Diffusion Day",
+        "location": "Cambridge, MA",
+        "date": "2025",
+        "description": "",
+        "slides": "/static/slides/modeling_empirical_measure.pdf",
+        "video": null,
+        "links": []
+    },
+    {
+        "title": "Generative modeling on the space of empirical measures",
+        "venue": "Harvard Statistics Seminar",
+        "location": "Cambridge, MA",
+        "date": "2025",
+        "description": "",
+        "slides": "/static/slides/modeling_empirical_measure.pdf",
+        "video": null,
+        "links": []
+    },
+    {
+        "title": "False Promises and False Premises of Fair Machine Learning",
+        "venue": "Columbia Algorithms and Society Seminar",
+        "location": "New York, NY",
+        "date": "2025",
+        "description": "Outlining the history of the field of fair machine learning and arguing that ``theoretical fairness'' is a doomed project.",
+        "slides": "/static/slides/false_promises.pdf",
+        "video": null,
+        "links": []
+    },
+    {
+        "title": "Predicting perturbations at single-cell resolution",
+        "venue": "Cell Circuits and Epigenomics Seminar",
+        "location": "Cambridge, MA",
+        "date": "2025",
+        "description": "An overview of the problem of single-cell perturbation prediction, presentation of results from benchmarking existing methods, and our novel approach for in silico experimentation.",
+        "slides": null,
+        "video": null,
+        "links": []
+    },
+    {
+        "title": "Constrained Riemannian Diffusion Modeling",
+        "venue": "Thesis Defense",
+        "location": "Oxford, UK",
+        "date": "2023",
+        "description": "",
+        "slides": "/static/slides/constrained_reimannian_diffusion_models.pdf",
+        "video": null,
+        "links": []
+    },
+    {
+        "title": "Should attention be all we need?",
+        "venue": "Stanford Human Centered Artificial Intelligence",
+        "location": "Stanford, CA",
+        "date": "2022",
+        "description": "",
+        "slides": "/static/slides/should_transformers_be_all_we_need.pdf",
+        "video": null,
+        "links": []
+    },
+    {
+        "title": "Should attention be all we need?",
+        "venue": "DeepMind Sociotechnical Systems",
+        "location": "London, England",
+        "date": "2022",
+        "description": "",
+        "slides": "/static/slides/should_transformers_be_all_we_need.pdf",
+        "video": null,
+        "links": []
+    }
+]

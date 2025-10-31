@@ -1,0 +1,13 @@
+name: website-build
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+    - markdown
+    - jinja2
+    - scholarly
+    - requests
+    - beautifulsoup4
+

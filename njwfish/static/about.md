@@ -1,6 +1,4 @@
-##### About
-
-My name is Nic Fishman, I am a PhD student in Statistics at Harvard University.
+My name is Nic Fishman, I am a PhD student in Statistics at Harvard University in Marinka Zitnik's lab.
 
 I build large-scale machine learning systems at the intersection of generative AI, multi-scale modeling, and causal inference, focusing on scientific applications in biology, healthcare, and social science.
 
@@ -14,4 +12,4 @@ Currently I am working on three major applied projects:
 
 In addition to application-driven work, I also consider questions about methodology and meta-science, trying to understand how to best use statistics, causal inference, and machine learning to answer scientific questions.
 
-You can find a more complete CV [here](resume), and you can reach me at njwfish [at] gmail.com.
+You can find a more complete CV [here](/static/cv.pdf), and you can reach me at njwfish [at] gmail.com.

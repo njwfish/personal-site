@@ -1,27 +1,28 @@
 {% extends "base.html" %}
 {% set active_page = "words" %}
+
 {% block content %}
-
-<style>
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th, td {
-  text-align: left;
-    vertical-align:top;
-  padding: 5px;
-}
-
-</style>
-
-<table>
-{% for url, title, blurb, time, _ in posts %}
-<tr>
-    <td><h5><a href={{ url }}>{{ title | safe}}</a></h5> {{ blurb | safe}}</td>
-    <td style="text-align: right"> {{ time }} </td>
-</tr>
-{% endfor %}
-    </table>
+<article class="page-content">
+    {% if posts %}
+    <section class="posts-section">
+        <ul class="posts-list">
+            {% for post in posts %}
+            <li class="post-entry">
+                <a href="/posts/{{ post.slug }}/" class="post-entry-link">
+                    <div class="post-entry-header">
+                        <h3 class="post-entry-title">{{ post.title }}</h3>
+                        <time class="post-entry-date">{{ post.date }}</time>
+                    </div>
+                    {% if post.blurb %}
+                    <p class="post-entry-blurb">{{ post.blurb }}</p>
+                    {% endif %}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% else %}
+    <p class="no-posts">No posts yet. Check back soon!</p>
+    {% endif %}
+</article>
 {% endblock %}
