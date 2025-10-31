@@ -8,7 +8,7 @@ import json
 import re
 import time
 from pathlib import Path
-from typing import List, Dict, Optional, Set
+from typing import List, Dict, Set
 from difflib import SequenceMatcher
 
 from scholarly import scholarly
@@ -37,6 +37,119 @@ def title_similarity(title1: str, title2: str) -> float:
     return SequenceMatcher(None, norm1, norm2).ratio()
 
 
+def format_author_list(authors, bold_name="Nic Fishman"):
+    """
+    Format author list with proper comma/and delimiters and bold the specified name.
+    
+    Rules:
+    - <= 3 authors: use "and" between all (e.g., "A and B and C")
+    - > 3 authors: use commas with "and" before last (e.g., "A, B, C, and D")
+    - Bold the specified name if it appears in the list
+    """
+    if not authors:
+        return ""
+    
+    # Handle list or string input
+    if isinstance(authors, list):
+        author_list = [str(a).strip() for a in authors if str(a).strip()]
+    elif isinstance(authors, str):
+        # Parse string - handle comma and "and" separators
+        author_list = []
+        # Split by "and" first, then by commas
+        parts = re.split(r'\s+and\s+', authors)
+        for part in parts:
+            sub_parts = [p.strip() for p in part.split(',') if p.strip()]
+            author_list.extend(sub_parts)
+        author_list = [a.strip() for a in author_list if a.strip()]
+    else:
+        author_list = [str(authors).strip()] if str(authors).strip() else []
+    
+    if not author_list:
+        return ""
+    
+    # Format each author, bolding if name matches
+    formatted_authors = []
+    for author in author_list:
+        author_str = str(author).strip()
+        # Remove existing HTML tags to check if name matches
+        clean_author = re.sub(r'<[^>]+>', '', author_str)
+        
+        # Check if this author should be bolded (case-insensitive partial match)
+        # Only add bold tags if not already present
+        if '<b>' in author_str or '<strong>' in author_str:
+            # Already has bold tags, keep as is
+            formatted_authors.append(author_str)
+        elif bold_name.lower() in clean_author.lower():
+            formatted_authors.append(f'<b>{author_str}</b>')
+        else:
+            formatted_authors.append(author_str)
+    
+    # Join according to rules
+    if len(formatted_authors) == 1:
+        return formatted_authors[0]
+    elif len(formatted_authors) == 2:
+        return f"{formatted_authors[0]} and {formatted_authors[1]}"
+    elif len(formatted_authors) == 3:
+        return f"{formatted_authors[0]} and {formatted_authors[1]} and {formatted_authors[2]}"
+    else:
+        # > 3 authors: commas with "and" before last
+        return ', '.join(formatted_authors[:-1]) + ', and ' + formatted_authors[-1]
+
+
+def extract_venue_from_citation(citation: str) -> str:
+    """Extract venue from citation string when venue field is missing"""
+    if not citation:
+        return ""
+    
+    citation = citation.strip()
+    
+    # Common patterns in citations:
+    # "OPT 2024: Optimization for Machine Learning, 2024"
+    # "Proceedings of the 2022 ACM Conference on Fairness, Accountability, and …, 2022"
+    
+    # Pattern 1: "Venue Year: Description, Year" - extract everything before the colon
+    # Keep the year if it's part of the venue name (e.g., "OPT 2024")
+    match = re.match(r'^([^:]+?):', citation)
+    if match:
+        venue = match.group(1).strip()
+        if venue:
+            return venue
+    
+    # Pattern 2: Remove trailing year if present (e.g., ", 2024" or " 2024")
+    citation_clean = re.sub(r',\s*\d{4}$', '', citation)
+    citation_clean = re.sub(r'\s+\d{4}$', '', citation_clean)
+    
+    # Pattern 3: If there's a colon, take everything before it
+    if ':' in citation_clean:
+        venue = citation_clean.split(':')[0].strip()
+        if venue:
+            return venue
+    
+    # Pattern 4: Split by comma and take everything except standalone years
+    parts = citation_clean.split(',')
+    if len(parts) > 1:
+        venue_parts = []
+        for part in parts:
+            part = part.strip()
+            # Skip if it's just a year or empty
+            if not re.match(r'^\d{4}$', part) and part:
+                venue_parts.append(part)
+        if venue_parts:
+            venue = ', '.join(venue_parts)
+            # Clean up trailing commas, "and,", and ellipsis
+            venue = venue.rstrip('…').strip()
+            venue = re.sub(r',\s*$', '', venue)  # Remove trailing comma
+            venue = re.sub(r'\s+and\s*,\s*$', '', venue)  # Remove "and," at end
+            venue = re.sub(r'\s+and\s*$', '', venue)  # Remove trailing "and"
+            return venue.strip()
+    
+    # Fallback: return cleaned citation
+    venue = citation_clean.rstrip('…').strip()
+    venue = re.sub(r',\s*$', '', venue)  # Remove trailing comma
+    venue = re.sub(r'\s+and\s*,\s*$', '', venue)  # Remove "and," at end
+    return venue.strip()
+
+
 def count_fields(paper: Dict) -> int:
     """Count how many fields are filled in a paper entry"""
     count = 0
@@ -49,55 +162,68 @@ def count_fields(paper: Dict) -> int:
 
 def merge_paper_entries(paper1: Dict, paper2: Dict) -> Dict:
     """
-    Merge two paper entries, keeping the entry with more information.
-    Prefers manual entries over auto-fetched, but merges fields intelligently.
+    Merge two paper entries, preferring Google Scholar data (more up-to-date)
+    but preserving local-only fields like github_link.
     """
-    # Determine which is more complete
-    count1 = count_fields(paper1)
-    count2 = count_fields(paper2)
+    # Determine which is from Google Scholar and which is local/manual
+    paper1_is_scholar = paper1.get('source') == 'google_scholar' or paper1.get('auto_fetched', False)
+    paper2_is_scholar = paper2.get('source') == 'google_scholar' or paper2.get('auto_fetched', False)
     
-    # Prefer manual entries if equally complete
-    if count1 == count2:
-        if paper1.get('source') == 'manual' and paper2.get('source') != 'manual':
-            base = paper1.copy()
-            other = paper2.copy()
-        elif paper2.get('source') == 'manual' and paper1.get('source') != 'manual':
-            base = paper2.copy()
-            other = paper1.copy()
-        else:
-            base = paper1.copy()
-            other = paper2.copy()
-    elif count1 > count2:
+    # Prefer Google Scholar as base (more up-to-date), but fall back to more complete entry
+    if paper1_is_scholar and not paper2_is_scholar:
+        # paper1 is from Google Scholar, use it as base
         base = paper1.copy()
-        other = paper2.copy()
-    else:
+        local = paper2.copy()
+    elif paper2_is_scholar and not paper1_is_scholar:
+        # paper2 is from Google Scholar, use it as base
         base = paper2.copy()
-        other = paper1.copy()
+        local = paper1.copy()
+    else:
+        # Both or neither from Google Scholar - use more complete as base
+        count1 = count_fields(paper1)
+        count2 = count_fields(paper2)
+        if count1 >= count2:
+            base = paper1.copy()
+            local = paper2.copy()
+        else:
+            base = paper2.copy()
+            local = paper1.copy()
     
-    # Merge fields, preferring non-empty values from base, but filling gaps from other
+    # Start with Google Scholar/base entry
     merged = base.copy()
     
-    # Merge fields that might be missing
-    for field in ['authors', 'venue', 'year', 'citation', 'pub_url', 'eprint_url', 'github_link']:
+    # Fields that Google Scholar provides - prefer base (Google Scholar) but fill gaps from local
+    scholar_fields = ['title', 'authors', 'venue', 'year', 'citation', 'pub_url', 'eprint_url', 'pdf_link']
+    for field in scholar_fields:
+        # If base is missing this field, fill from local
         if not merged.get(field) or not str(merged[field]).strip():
-            if other.get(field) and str(other[field]).strip():
-                merged[field] = other[field]
+            if local.get(field) and str(local[field]).strip():
+                merged[field] = local[field]
     
-    # Special handling for PDF links - prefer the one that exists
-    if not merged.get('pdf_link') or not merged['pdf_link']:
-        if other.get('pdf_link') and other['pdf_link']:
-            merged['pdf_link'] = other['pdf_link']
+    # Fields that are typically local-only - always preserve from local if present
+    local_only_fields = ['github_link']
+    for field in local_only_fields:
+        if local.get(field) and str(local[field]).strip():
+            merged[field] = local[field]
+    
+    # If venue is still missing but citation exists, try to extract venue from citation
+    if not merged.get('venue') or not str(merged.get('venue', '')).strip():
+        citation = merged.get('citation', '')
+        if citation:
+            extracted_venue = extract_venue_from_citation(citation)
+            if extracted_venue:
+                merged['venue'] = extracted_venue
     
     # Track sources
     sources = set()
     if merged.get('source'):
         sources.add(merged['source'])
-    if other.get('source'):
-        sources.add(other['source'])
+    if local.get('source'):
+        sources.add(local['source'])
     merged['source'] = ','.join(sorted(sources)) if sources else 'merged'
     
     # If either was auto-fetched, mark as potentially auto-fetched
-    merged['auto_fetched'] = merged.get('auto_fetched', False) or other.get('auto_fetched', False)
+    merged['auto_fetched'] = merged.get('auto_fetched', False) or local.get('auto_fetched', False)
     
     return merged
 
@@ -131,16 +257,16 @@ def fetch_google_scholar_publications() -> List[Dict]:
                 
                 # Handle authors - can be list or string
                 author_list = filled_pub.get('bib', {}).get('author', [])
-                if isinstance(author_list, list):
-                    authors = ', '.join(author_list) if author_list else ''
-                elif isinstance(author_list, str):
-                    authors = author_list
-                else:
-                    authors = str(author_list) if author_list else ''
+                # Format authors with proper comma/and delimiters and bold Nic Fishman
+                authors = format_author_list(author_list, bold_name="Nic Fishman")
                 
                 venue = filled_pub.get('bib', {}).get('venue', '') or filled_pub.get('bib', {}).get('journal', '')
                 year = filled_pub.get('bib', {}).get('pub_year', '')
                 citation = filled_pub.get('bib', {}).get('citation', '')
+                
+                # If venue is missing but citation exists, try to extract venue from citation
+                if not venue and citation:
+                    venue = extract_venue_from_citation(citation)
                 
                 # Get publication URL
                 pub_url = filled_pub.get('pub_url', '')
@@ -227,29 +353,34 @@ def organize_papers(papers: List[Dict]) -> Dict:
     working = []
     
     for paper in papers:
-        venue = paper.get('venue', '').lower()
-        year = paper.get('year', '')
+        venue = paper.get('venue', '').strip()
+        citation = paper.get('citation', '').strip()
         
-        # Determine if published
-        is_published = False
-        if venue and venue.strip():
-            # Check for working paper indicators
-            if 'in preparation' in venue.lower() or 'in prep' in venue.lower():
-                is_published = False
-            # Check if venue looks like a real publication venue
-            elif any(journal in venue.lower() for journal in [
-                'science', 'nature', 'advances in neural', 'neurips', 'proceedings', 
-                'journal', 'conference', 'arxiv', 'transactions', 'icml', 'acl', 'opt',
-                'tac', 'ijcai', 'aaai', 'iclr', 'jmlr', 'pami', 'cvpr', 'eccv', 'iccv'
-            ]):
-                is_published = True
-            elif year and year.isdigit() and int(year) >= 2018:
-                is_published = True
+        # If venue is empty but citation exists, try to extract venue from citation
+        if not venue and citation:
+            venue = extract_venue_from_citation(citation)
+            paper['venue'] = venue
         
-        if is_published:
-            published.append(paper)
-        else:
+        # Format authors consistently
+        authors = paper.get('authors', '')
+        if authors and isinstance(authors, str) and authors.strip():
+            paper['authors'] = format_author_list(authors, bold_name="Nic Fishman")
+        
+        venue_lower = venue.lower() if venue else ''
+        
+        # Check for working paper indicators
+        if not venue_lower:
+            # No venue = working paper
             working.append(paper)
+        elif 'in preparation' in venue_lower or 'in prep' in venue_lower:
+            # Explicitly marked as working
+            working.append(paper)
+        elif 'arxiv' in venue_lower:
+            # arXiv-only = working paper
+            working.append(paper)
+        else:
+            # Has venue = published
+            published.append(paper)
     
     # Sort by year (newest first)
     published.sort(key=lambda p: (p.get('year', '') or '0'), reverse=True)

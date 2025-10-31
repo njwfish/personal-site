@@ -2,7 +2,7 @@
   "published": [
     {
       "title": "Partisan disparities in the funding of science in the United States",
-      "authors": "Alexander C Furnas and Nic Fishman and Leah Rosenstiel and Dashun Wang",
+      "authors": "Alexander C Furnas, <b>Nic Fishman</b>, Leah Rosenstiel, and Dashun Wang",
       "venue": "Science",
       "year": "2025",
       "citation": "Science 389 (6766), 1195-1200, 2025",
@@ -13,20 +13,20 @@
       "auto_fetched": true
     },
     {
-      "title": "Generative Distribution Embeddings",
-      "authors": "Nic Fishman and Gokul Gowri and Peng Yin and Jonathan Gootenberg and Omar Abudayyeh",
-      "venue": "arXiv preprint arXiv:2505.18150",
-      "year": "2025",
-      "citation": "arXiv preprint arXiv:2505.18150, 2025",
-      "pdf_link": "https://arxiv.org/abs/2505.18150",
-      "pub_url": "https://arxiv.org/abs/2505.18150",
+      "title": "Estimating Vote Choice in US Elections with Approximate Poisson-Binomial Logistic Regression",
+      "authors": "<b>Nic Fishman</b> and Evan Rosenman",
+      "venue": "OPT 2024",
+      "year": "2024",
+      "citation": "OPT 2024: Optimization for Machine Learning, 2024",
+      "pdf_link": "https://openreview.net/forum?id=FbBswx1Fhu",
+      "pub_url": "https://openreview.net/forum?id=FbBswx1Fhu",
       "eprint_url": "",
       "source": "google_scholar",
       "auto_fetched": true
     },
     {
       "title": "The fragility of fairness: Causal sensitivity analysis for fair machine learning",
-      "authors": "Jake Fawkes and Nic Fishman and Mel Andrews and Zachary Lipton",
+      "authors": "Jake Fawkes, <b>Nic Fishman</b>, Mel Andrews, and Zachary Lipton",
       "venue": "Advances in Neural Information Processing Systems",
       "year": "2024",
       "citation": "Advances in Neural Information Processing Systems 37, 137105-137134, 2024",
@@ -38,7 +38,7 @@
     },
     {
       "title": "Human mobility networks reveal increased segregation in large cities",
-      "authors": "Hamed Nilforoshan and Wenli Looi and Emma Pierson and Blanca Villanueva and Nic Fishman and Yiling Chen and John Sholar and Beth Redbird and David Grusky and Jure Leskovec",
+      "authors": "Hamed Nilforoshan, Wenli Looi, Emma Pierson, Blanca Villanueva, <b>Nic Fishman</b>, Yiling Chen, John Sholar, Beth Redbird, David Grusky, and Jure Leskovec",
       "venue": "Nature",
       "year": "2023",
       "citation": "Nature 624 (7992), 586-592, 2023",
@@ -50,7 +50,7 @@
     },
     {
       "title": "Diffusion models for constrained domains",
-      "authors": "Nic Fishman and Leo Klarner and Valentin De Bortoli and Emile Mathieu and Michael Hutchinson",
+      "authors": "<b>Nic Fishman</b>, Leo Klarner, Valentin De Bortoli, Emile Mathieu, and Michael Hutchinson",
       "venue": "Transactions on Machine Learning Research",
       "year": "2023",
       "citation": "Transactions on Machine Learning Research, 2023",
@@ -62,7 +62,7 @@
     },
     {
       "title": "Metropolis sampling for constrained diffusion models",
-      "authors": "Nic Fishman and Leo Klarner and Emile Mathieu and Michael Hutchinson and Valentin De Bortoli",
+      "authors": "<b>Nic Fishman</b>, Leo Klarner, Emile Mathieu, Michael Hutchinson, and Valentin De Bortoli",
       "venue": "Advances in Neural Information Processing Systems",
       "year": "2023",
       "citation": "Advances in Neural Information Processing Systems 36, 62296-62331, 2023",
@@ -74,7 +74,7 @@
     },
     {
       "title": "Change we can believe in: Structural and content dynamics within belief networks",
-      "authors": "Nic Fishman and Nicholas T Davis",
+      "authors": "<b>Nic Fishman</b> and Nicholas T Davis",
       "venue": "American Journal of Political Science",
       "year": "2022",
       "citation": "American Journal of Political Science 66 (3), 648-663, 2022",
@@ -85,8 +85,32 @@
       "auto_fetched": true
     },
     {
+      "title": "Should attention be all we need? The epistemic and ethical implications of unification in machine learning",
+      "authors": "<b>Nic Fishman</b> and Leif Hancox-Li",
+      "venue": "Proceedings of the 2022 ACM Conference on Fairness, Accountability,",
+      "year": "2022",
+      "citation": "Proceedings of the 2022 ACM Conference on Fairness, Accountability, and …, 2022",
+      "pdf_link": "https://dl.acm.org/doi/abs/10.1145/3531146.3533206",
+      "pub_url": "https://dl.acm.org/doi/abs/10.1145/3531146.3533206",
+      "eprint_url": "",
+      "source": "google_scholar",
+      "auto_fetched": true
+    },
+    {
+      "title": "Making (Global) Criminal Procedure: Empire, the End of Justice, and the Rise of Efficiency",
+      "authors": "<b>Nic Fishman</b>",
+      "venue": "Stanford University",
+      "year": "2021",
+      "citation": "Stanford University, 2021",
+      "pdf_link": null,
+      "pub_url": "",
+      "eprint_url": "",
+      "source": "google_scholar",
+      "auto_fetched": true
+    },
+    {
       "title": "Fleeing from Terror: Considering Safety When Designing Public Spaces in the Age of Mass Murder",
-      "authors": "Nic Fishman",
+      "authors": "<b>Nic Fishman</b>",
       "venue": "Pathways: Stanford Journal of Public Health (SJPH)",
       "year": "2018",
       "citation": "Pathways: Stanford Journal of Public Health (SJPH) 7, 2018",
@@ -98,109 +122,15 @@
     },
     {
       "title": "Systematic characterization of generative models for de novo design of regulatory DNA",
-      "authors": "<b>Fishman, N.</b>, Shrikumar, A., Marinov, G., Kundaje, A.",
+      "authors": "<b>Fishman, N.</b>, Shrikumar, A., Marinov, G., Kundaje, and A.",
       "venue": "(Spotlight) International Conference on Machine Learning, Computational Biology Workshop, 2020",
       "pdf_link": "https://icml-compbio.github.io/icml-website-2020/2020/papers/WCBICML2020_paper_46.pdf",
       "source": "manual",
       "auto_fetched": false
-    }
-  ],
-  "working": [
-    {
-      "title": "Estimating Vote Choice in US Elections with Approximate Poisson-Binomial Logistic Regression",
-      "authors": "Nic Fishman and Evan Rosenman",
-      "venue": "",
-      "year": "2024",
-      "citation": "OPT 2024: Optimization for Machine Learning, 2024",
-      "pdf_link": "https://openreview.net/forum?id=FbBswx1Fhu",
-      "pub_url": "https://openreview.net/forum?id=FbBswx1Fhu",
-      "eprint_url": "",
-      "source": "google_scholar",
-      "auto_fetched": true
-    },
-    {
-      "title": "Should attention be all we need? The epistemic and ethical implications of unification in machine learning",
-      "authors": "Nic Fishman and Leif Hancox-Li",
-      "venue": "",
-      "year": "2022",
-      "citation": "Proceedings of the 2022 ACM Conference on Fairness, Accountability, and …, 2022",
-      "pdf_link": "https://dl.acm.org/doi/abs/10.1145/3531146.3533206",
-      "pub_url": "https://dl.acm.org/doi/abs/10.1145/3531146.3533206",
-      "eprint_url": "",
-      "source": "google_scholar",
-      "auto_fetched": true
-    },
-    {
-      "title": "Making (Global) Criminal Procedure: Empire, the End of Justice, and the Rise of Efficiency",
-      "authors": "Nic Fishman",
-      "venue": "",
-      "year": "2021",
-      "citation": "Stanford University, 2021",
-      "pdf_link": null,
-      "pub_url": "",
-      "eprint_url": "",
-      "source": "google_scholar",
-      "auto_fetched": true
-    },
-    {
-      "title": "The False Promise of Controlling False Positives: Ephemerality and the \"Replication Crisis\" in Observational Studies",
-      "authors": "Ben-Menachem, J.,* <b>Fishman, N.,*</b> Galper, G.*",
-      "venue": "",
-      "pdf_link": null,
-      "source": "manual",
-      "auto_fetched": false
-    },
-    {
-      "title": "SimDNA: a library for simulating regulatory genomic sequences",
-      "authors": "Shrikumar, A.,* <b>Fishman, N.*</b>, Kundaje, A.",
-      "venue": "",
-      "pdf_link": null,
-      "source": "manual",
-      "auto_fetched": false
-    },
-    {
-      "title": "Principled Models for Analyzing Max-Diff Surveys",
-      "authors": "<b>Fishman, N.</b>",
-      "venue": "",
-      "pdf_link": null,
-      "source": "manual",
-      "auto_fetched": false
-    },
-    {
-      "title": "Monotone Interference",
-      "authors": "<b>Fishman, N.</b> and Imai, K.",
-      "venue": "",
-      "pdf_link": null,
-      "source": "manual",
-      "auto_fetched": false
-    },
-    {
-      "title": "Deep Ecological Inference",
-      "authors": "Nic Fishman and Colin McAuliffe",
-      "venue": "",
-      "year": "",
-      "citation": "Nic Fishman and Colin McAuliffe, \"Deep Ecological Inference\"",
-      "pdf_link": "https://openreview.net/forum?id=mxfRhLgLg_",
-      "pub_url": "https://openreview.net/forum?id=mxfRhLgLg_",
-      "eprint_url": "",
-      "source": "google_scholar",
-      "auto_fetched": true
-    },
-    {
-      "title": "Denoising ATAC-seq with Convolutional Neural",
-      "authors": "Nic Fishman and Sarah Gurev",
-      "venue": "",
-      "year": "",
-      "citation": "Nic Fishman and Sarah Gurev, \"Denoising ATAC-seq with Convolutional Neural\"",
-      "pdf_link": null,
-      "pub_url": "",
-      "eprint_url": "",
-      "source": "google_scholar",
-      "auto_fetched": true
     },
     {
       "title": "kundajelab/simdna: simulated datasets of DNA, June 2019",
-      "authors": "Avant Shrikumar and Nic Fishman and Anshul Kundaje",
+      "authors": "Avant Shrikumar and <b>Nic Fishman</b> and Anshul Kundaje",
       "venue": "URL https://doi. org/10.5281/zenodo",
       "year": "",
       "citation": "URL https://doi. org/10.5281/zenodo 3258813, 0",
@@ -212,15 +142,53 @@
     },
     {
       "title": "Understanding Transcriptional Regulatory Logic Using Convolutional and Generative Deep Learning Models",
-      "authors": "Nic Fishman and Georgi K Marinov and Anshul Kundaje",
-      "venue": "",
+      "authors": "<b>Nic Fishman</b> and Georgi K Marinov and Anshul Kundaje",
+      "venue": "<b>Nic Fishman</b> and Georgi K Marinov and Anshul Kundaje, \"Understanding Transcriptional Regulatory Logic Using Convolutional and Generative Deep Learning Models\"",
       "year": "",
-      "citation": "Nic Fishman and Georgi K Marinov and Anshul Kundaje, \"Understanding Transcriptional Regulatory Logic Using Convolutional and Generative Deep Learning Models\"",
+      "citation": "<b>Nic Fishman</b> and Georgi K Marinov and Anshul Kundaje, \"Understanding Transcriptional Regulatory Logic Using Convolutional and Generative Deep Learning Models\"",
       "pdf_link": "https://cs229.stanford.edu/proj2018/report/400.pdf",
       "pub_url": "https://cs229.stanford.edu/proj2018/report/400.pdf",
       "eprint_url": "",
       "source": "google_scholar",
       "auto_fetched": true
+    }
+  ],
+  "working": [
+    {
+      "title": "Generative Distribution Embeddings",
+      "authors": "<b>Nic Fishman</b>, Gokul Gowri, Peng Yin, Jonathan Gootenberg, and Omar Abudayyeh",
+      "venue": "arXiv preprint arXiv:2505.18150",
+      "year": "2025",
+      "citation": "arXiv preprint arXiv:2505.18150, 2025",
+      "pdf_link": "https://arxiv.org/abs/2505.18150",
+      "pub_url": "https://arxiv.org/abs/2505.18150",
+      "eprint_url": "",
+      "source": "google_scholar",
+      "auto_fetched": true
+    },
+    {
+      "title": "The False Promise of Controlling False Positives: Ephemerality and the \"Replication Crisis\" in Observational Studies",
+      "authors": "Ben-Menachem, J., * <b>Fishman, N., *</b> Galper, and G.*",
+      "venue": "",
+      "pdf_link": null,
+      "source": "manual",
+      "auto_fetched": false
+    },
+    {
+      "title": "SimDNA: a library for simulating regulatory genomic sequences",
+      "authors": "Shrikumar, A., * <b>Fishman, N.*</b>, Kundaje, and A.",
+      "venue": "",
+      "pdf_link": null,
+      "source": "manual",
+      "auto_fetched": false
+    },
+    {
+      "title": "Principled Models for Analyzing Max-Diff Surveys",
+      "authors": "<b>Fishman and N.</b>",
+      "venue": "",
+      "pdf_link": null,
+      "source": "manual",
+      "auto_fetched": false
     }
   ]
 }

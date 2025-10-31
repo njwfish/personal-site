@@ -84,12 +84,17 @@ def format_authors(authors_str, bold_name="Fishman"):
             formatted.append(escape_latex(author))
     
     # Join with ", " and "and" appropriately
+    # <= 3 authors: use "and" between all
+    # > 3 authors: use commas with "and" before last
     if len(formatted) == 1:
         return formatted[0]
     elif len(formatted) == 2:
         return formatted[0] + ' and ' + formatted[1]
+    elif len(formatted) == 3:
+        return formatted[0] + ' and ' + formatted[1] + ' and ' + formatted[2]
     else:
-        return ', '.join(formatted[:-1]) + ' and ' + formatted[-1]
+        # > 3 authors: commas with "and" before last
+        return ', '.join(formatted[:-1]) + ', and ' + formatted[-1]
 
 def format_venue(venue_str):
     """Format venue string"""
@@ -154,7 +159,7 @@ def generate_cv_writing(papers_json_path, output_path):
         for paper in papers_data:
             venue = paper.get('venue', '').lower()
             year = paper.get('year', '')
-            if venue and venue.strip() and not 'in preparation' in venue.lower():
+            if venue and venue.strip() and 'in preparation' not in venue.lower():
                 if any(journal in venue.lower() for journal in ['science', 'nature', 'advances in neural', 'neurips', 'proceedings', 'journal', 'conference', 'arxiv', 'transactions', 'icml', 'opt']):
                     published_papers.append(paper)
                 elif year and year.isdigit() and int(year) >= 2018:
