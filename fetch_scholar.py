@@ -102,6 +102,7 @@ def extract_venue_from_citation(citation: str) -> str:
         return ""
     
     citation = citation.strip()
+    citation_lower = citation.lower()
     
     # Common patterns in citations:
     # "OPT 2024: Optimization for Machine Learning, 2024"
@@ -125,6 +126,15 @@ def extract_venue_from_citation(citation: str) -> str:
         if venue:
             return venue
     
+    # Special case: FAccT conference (often truncated with ellipsis)
+    if 'fairness' in citation_lower and 'accountability' in citation_lower:
+        year_match = re.search(r'\d{4}', citation)
+        year = year_match.group(0) if year_match else ''
+        if year:
+            return f"Proceedings of the {year} ACM Conference on Fairness, Accountability, and Transparency"
+        else:
+            return "Proceedings of the ACM Conference on Fairness, Accountability, and Transparency"
+    
     # Pattern 4: Split by comma and take everything except standalone years
     parts = citation_clean.split(',')
     if len(parts) > 1:
@@ -133,11 +143,14 @@ def extract_venue_from_citation(citation: str) -> str:
             part = part.strip()
             # Skip if it's just a year or empty
             if not re.match(r'^\d{4}$', part) and part:
-                venue_parts.append(part)
+                # Skip ellipsis-only parts
+                if part != '…' and part:
+                    venue_parts.append(part)
         if venue_parts:
             venue = ', '.join(venue_parts)
-            # Clean up trailing commas, "and,", and ellipsis
+            # Clean up trailing commas, "and,", ellipsis, and multiple commas
             venue = venue.rstrip('…').strip()
+            venue = re.sub(r',\s*,+', ',', venue)  # Remove multiple consecutive commas
             venue = re.sub(r',\s*$', '', venue)  # Remove trailing comma
             venue = re.sub(r'\s+and\s*,\s*$', '', venue)  # Remove "and," at end
             venue = re.sub(r'\s+and\s*$', '', venue)  # Remove trailing "and"
