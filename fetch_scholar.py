@@ -354,9 +354,9 @@ def organize_papers(papers: List[Dict]) -> Dict:
     
     # Publication venue indicators
     publication_indicators = [
-        'science', 'nature', 'neurips', 'proceedings', 'journal', 'conference',
-        'transactions', 'icml', 'acl', 'opt', 'acm', 'fairness', 'accountability',
-        'ijcai', 'aaai', 'iclr', 'jmlr', 'pami', 'cvpr', 'eccv', 'iccv'
+        'science', 'nature', 'neurips', 'advances in neural', 'neural information processing',
+        'proceedings', 'journal', 'conference', 'transactions', 'icml', 'acl', 'opt', 'acm',
+        'fairness', 'accountability', 'ijcai', 'aaai', 'iclr', 'jmlr', 'pami', 'cvpr', 'eccv', 'iccv'
     ]
     
     for paper in papers:
@@ -390,9 +390,13 @@ def organize_papers(papers: List[Dict]) -> Dict:
             continue
         
         # Check if venue looks like a publication venue
-        if any(indicator in venue_lower or indicator in citation_lower for indicator in publication_indicators):
+        # Check both venue and citation for publication indicators
+        is_published = any(indicator in venue_lower or indicator in citation_lower for indicator in publication_indicators)
+        
+        if is_published:
             published.append(paper)
         else:
+            # Default to working if no clear publication indicator
             working.append(paper)
     
     # Sort by year (newest first)

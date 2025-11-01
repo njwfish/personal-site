@@ -3,7 +3,6 @@
 Static Site Generator for Personal Website
 Converts markdown and templates to static HTML files
 """
-import os
 import markdown
 import codecs
 import json
@@ -42,6 +41,7 @@ def load_post(post_dir):
     # Read title and blurb
     title_file = post_dir / 'title'
     blurb_file = post_dir / 'blurb'
+    date_file = post_dir / 'date'
     
     title = title_file.read_text().strip() if title_file.exists() else post_name.replace('_', ' ').title()
     blurb = blurb_file.read_text().strip() if blurb_file.exists() else ""
@@ -78,10 +78,27 @@ def load_post(post_dir):
             blurb = "No description available."
             blurb_file.write_text(blurb)
     
-    # Get modification time
-    mtime = os.path.getmtime(post_dir)
-    date_str = time.strftime('%B %d, %Y', time.gmtime(mtime))
-    date_sort = time.gmtime(mtime)
+    # Get date from date file (required)
+    if not date_file.exists():
+        raise ValueError(f"Missing required 'date' file in {post_dir}")
+    
+    # Parse date from file (expects format: YYYY-MM-DD or YYYY/MM/DD)
+    date_str_raw = date_file.read_text().strip()
+    date_tuple = None
+    
+    # Try common date formats
+    for fmt in ['%Y-%m-%d', '%Y/%m/%d', '%Y-%m-%d %H:%M:%S', '%Y/%m/%d %H:%M:%S']:
+        try:
+            date_tuple = time.strptime(date_str_raw, fmt)
+            break
+        except ValueError:
+            continue
+    
+    if date_tuple is None:
+        raise ValueError(f"Could not parse date '{date_str_raw}' in {post_dir}. Expected format: YYYY-MM-DD")
+    
+    date_sort = date_tuple
+    date_str = time.strftime('%B %d, %Y', date_tuple)
     
     return {
         'slug': post_name,
@@ -254,7 +271,14 @@ def build_site():
     build_cv()
     
     # Load data
-    posts = load_posts()
+    try:
+        posts = load_posts()
+    except Exception as e:
+        print(f"Error loading posts: {e}")
+        import traceback
+        traceback.print_exc()
+        raise
+    
     talks = load_talks()
     
     # Setup Jinja2 environment
@@ -268,17 +292,25 @@ def build_site():
     
     # Build index/about page
     print("Building index page...")
-    about_md = STATIC_DIR / 'about.md'
-    about_content = md_to_html(about_md) if about_md.exists() else ""
-    
-    about_template = env.get_template('about.html')
-    index_html = about_template.render(
-        active_page='index',
-        title='Nic Fishman',
-        description='PhD student in Statistics at Harvard University',
-        content=about_content
-    )
-    (OUTPUT_DIR / 'index.html').write_text(index_html)
+    try:
+        about_md = STATIC_DIR / 'about.md'
+        about_content = md_to_html(about_md) if about_md.exists() else ""
+        
+        about_template = env.get_template('about.html')
+        index_html = about_template.render(
+            active_page='index',
+            title='Nic Fishman',
+            description='PhD student in Statistics at Harvard University',
+            content=about_content
+        )
+        index_path = OUTPUT_DIR / 'index.html'
+        index_path.write_text(index_html)
+        print(f"✓ Created {index_path}")
+    except Exception as e:
+        print(f"Error building index page: {e}")
+        import traceback
+        traceback.print_exc()
+        raise
     
     # Build posts listing page
     print("Building posts page...")
@@ -365,6 +397,33 @@ def build_site():
     print(f"Site built successfully! Output in {OUTPUT_DIR}/")
     print(f"Total posts: {len(posts)}")
     print(f"Total talks: {len(talks)}")
+    
+    # Verify critical files were created
+    critical_files = [
+        OUTPUT_DIR / 'index.html',
+        OUTPUT_DIR / 'papers' / 'index.html',
+        OUTPUT_DIR / 'posts' / 'index.html',
+        OUTPUT_DIR / 'talks' / 'index.html',
+    ]
+    print("\nVerifying build output:")
+    all_present = True
+    for file_path in critical_files:
+        if file_path.exists():
+            print(f"  ✓ {file_path}")
+        else:
+            print(f"  ✗ MISSING: {file_path}")
+            all_present = False
+    
+    if not all_present:
+        raise RuntimeError("Build failed: Some critical files were not created!")
+    
+    # List all top-level files
+    print(f"\nFiles in {OUTPUT_DIR}:")
+    for item in sorted(OUTPUT_DIR.iterdir()):
+        if item.is_file():
+            print(f"  {item.name}")
+        elif item.is_dir():
+            print(f"  {item.name}/")
 
 def deploy_to_gh_pages():
     """Deploy built site to gh-pages branch"""
@@ -401,6 +460,33 @@ def deploy_to_gh_pages():
     site_path = OUTPUT_DIR.resolve()
     print(f"✓ Found built site at {site_path}")
     
+    # Copy entire site to temporary location BEFORE switching branches
+    # This ensures files are available even if git operations affect the site directory
+    import tempfile
+    temp_deploy_dir = Path(tempfile.mkdtemp(prefix='site_deploy_'))
+    print(f"  Copying site to temporary location: {temp_deploy_dir}")
+    
+    if not site_path.exists():
+        print(f"Error: Site directory {site_path} does not exist!")
+        return
+    
+    # Copy entire site directory to temp location
+    temp_site_path = temp_deploy_dir / 'site'
+    shutil.copytree(site_path, temp_site_path)
+    
+    # Enumerate files to copy from temp location
+    items_to_copy = []
+    for item in temp_site_path.iterdir():
+        if item.name != '.git':
+            items_to_copy.append(item)
+    
+    print(f"  Found {len(items_to_copy)} items to copy: {[item.name for item in items_to_copy]}")
+    
+    if not items_to_copy:
+        print("Error: No files found in site directory to copy!")
+        shutil.rmtree(temp_deploy_dir, ignore_errors=True)
+        return
+    
     # Stash any uncommitted changes
     subprocess.run(['git', 'stash'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     
@@ -424,29 +510,51 @@ def deploy_to_gh_pages():
             subprocess.run(['git', 'rm', '-rf', '--quiet', '.'], 
                           stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         
-        # Copy built site files (using absolute path from master branch)
-        # Copy contents of site_path to current directory root
+        # Copy built site files using pre-enumerated list
+        # IMPORTANT: We're on gh-pages branch now, so copying to current directory is safe
         print("Copying built site files...")
+        current_dir = Path.cwd()
+        print(f"  Current directory: {current_dir}")
+        
+        # Verify we're actually on gh-pages branch
+        result = subprocess.run(['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                              capture_output=True, text=True)
+        current_branch_check = result.stdout.strip()
+        if current_branch_check != 'gh-pages':
+            print(f"Warning: Not on gh-pages branch (on {current_branch_check}). Aborting copy to prevent overwriting master branch files.")
+            return
+        
         files_copied = 0
-        for item in site_path.iterdir():
-            if item.name != '.git':
-                dest = Path(item.name)
+        
+        for item in items_to_copy:
+            dest = Path(item.name)
+            print(f"  Copying {item.name} -> {dest}")
+            try:
                 if item.is_dir():
                     if dest.exists():
                         shutil.rmtree(dest)
                     shutil.copytree(item, dest)
                     files_copied += 1
+                    print(f"    ✓ Successfully copied {item.name}/")
                 else:
                     shutil.copy2(item, dest)
                     files_copied += 1
+                    print(f"    ✓ Successfully copied {item.name}")
+            except Exception as e:
+                print(f"    ✗ Error copying {item.name}: {e}")
+                import traceback
+                traceback.print_exc()
         
         if files_copied == 0:
             print("Warning: No files to copy. Site may not have been built correctly.")
             return
         
         # Verify index.html was copied
-        if not Path('index.html').exists():
+        index_path = Path('index.html')
+        if not index_path.exists():
             print("Error: index.html was not copied! Deployment aborted.")
+            print(f"  Current directory: {Path.cwd()}")
+            print(f"  Files in current directory: {list(Path('.').iterdir())}")
             return
         
         print(f"✓ Copied {files_copied} files/directories")
@@ -485,6 +593,11 @@ def deploy_to_gh_pages():
         print(f"Error during deployment: {e}")
         print("Switching back to original branch...")
     finally:
+        # Clean up temporary directory
+        if 'temp_deploy_dir' in locals() and temp_deploy_dir.exists():
+            print(f"Cleaning up temporary directory: {temp_deploy_dir}")
+            shutil.rmtree(temp_deploy_dir, ignore_errors=True)
+        
         # Switch back to original branch
         print(f"Switching back to {current_branch} branch...")
         subprocess.run(['git', 'checkout', current_branch], stdout=subprocess.PIPE, stderr=subprocess.PIPE)

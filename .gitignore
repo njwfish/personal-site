@@ -9,5 +9,3 @@ condaenv.*.requirements.txt
 
 # Build outputs
 site/
-docs/
-test_deploy_output/
